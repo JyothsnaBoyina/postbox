@@ -5,9 +5,12 @@
     <title>Postbox</title>
     <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-   <link rel="stylesheet" href="/postbox/static/css/bootstrap.min.css">
-  <script src="/postbox/static/js/jquery-2.2.4.min.js"></script>
-  <script src="/postbox/static/js/bootstrap.min.js"></script>
+   {% load staticfiles %}
+   <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <script src="{% static 'js/jquery-2.2.4.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js'  %}"></script><link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <style>
     /* Set black background color, white text and some padding */
     body{  position: relative;  }
