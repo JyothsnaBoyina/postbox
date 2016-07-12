@@ -599,7 +599,7 @@ def invalid_login(request):
 def logout(request):
     auth.logout(request)
     render_to_response('registration/login.html')
-    return HttpResponseRedirect('/accounts/login/')
+    return HttpResponseRedirect('/')
 
 def register_user(request):
     context=RequestContext(request)
@@ -608,7 +608,7 @@ def register_user(request):
         if form.is_valid():
             try:
                form.save()
-               return HttpResponseRedirect('/accounts/login/')
+               return HttpResponseRedirect('/')
             except Exception as e:
                 mesg = 'user not registered.Try again'
                 return render_to_response('registration/register.html',

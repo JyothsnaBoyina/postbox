@@ -8,7 +8,9 @@
    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
   <script src="{% static 'js/jquery-2.2.4.min.js' %}"></script>
   <script src="{% static 'bootstrap/js/bootstrap.min.js'  %}"></script>
-
+    <script src="{% static 'js/tinymce/tinymce.min.js' %}"></script>
+{#  <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>#}
+  <script>tinymce.init({ selector:'textarea' });</script>
 
   <style>
     /* Set black background color, white text and some padding */

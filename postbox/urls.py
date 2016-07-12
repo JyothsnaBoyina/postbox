@@ -6,10 +6,10 @@ from postbox import api
 
 urlpatterns=[
 
-    url(r'^(?P<uname>[A-Za-z]*)/$', login_required(Newsfeed.as_view()), name='news'),
-    url(r'^(?P<uname>[A-Za-z]*)/(?P<uid>[0-9]+)/(?P<pid>[0-9]+)/comments/$', login_required(CommentList1.as_view()),name='comment_list1'),
+    url(r'^(?P<uname>[A-Za-z]*)/$', Newsfeed.as_view(), name='news'),
+    url(r'^(?P<uname>[A-Za-z]*)/(?P<uid>[0-9]+)/(?P<pid>[0-9]+)/comments/$', CommentList1.as_view(),name='comment_list1'),
 
-    url(r'^(?P<uname>[A-Za-z]*)/profile/$', login_required(Profile.as_view()), name='user'),
+    url(r'^(?P<uname>[A-Za-z]*)/profile/$', Profile.as_view(), name='user'),
 
     url(r'^(?P<uname>[A-Za-z]*)/(?P<uid>[0-9]+)/(?P<cid>[0-9]+)/$', login_required(PostList.as_view()), name='post_list'),
     url(r'^(?P<uname>[A-Za-z]*)/(?P<uid>[0-9]+)/(?P<cid>[0-9]+)/(?P<pid>[0-9]+)/comments/$', login_required(CommentList.as_view()), name='comment_list'),
