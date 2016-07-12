@@ -80,12 +80,12 @@ WSGI_APPLICATION = 'post.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'postbox',
-        'USER': 'Jyo',
-        'PASSWORD': 'system',
-        'HOST': 'localhost',
-        'PORT': '3306'
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'dq5qjv4g4fn8m',
+        'USER': 'zjwbnlandwgqoz',
+        'PASSWORD': 'EmafNF-oUbSlVEjt3vhh5X03-k',
+        'HOST': 'ec2-54-235-90-96.compute-1.amazonaws.com',
+        'PORT': '5432'
     }
 }
 
