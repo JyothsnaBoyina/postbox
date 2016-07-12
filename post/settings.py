@@ -82,15 +82,22 @@ WSGI_APPLICATION = 'post.wsgi.application'
 DATABASES = {
     'default': {
 
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-
         # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        # 'NAME': 'dq5qjv4g4fn8m',
-        # 'USER': 'zjwbnlandwgqoz',
-        # 'PASSWORD': 'EmafNF-oUbSlVEjt3vhh5X03-k',
-        # 'HOST': 'ec2-54-235-90-96.compute-1.amazonaws.com',
+        # 'NAME': 'postbox',
+        # 'USER': 'postgres',
+        # 'PASSWORD': 'system2',
+        # 'HOST': 'localhost',
         # 'PORT': '5432'
+
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'dq5qjv4g4fn8m',
+        'USER': 'zjwbnlandwgqoz',
+        'PASSWORD': 'EmafNF-oUbSlVEjt3vhh5X03-k',
+        'HOST': 'ec2-54-235-90-96.compute-1.amazonaws.com',
+        'PORT': '5432'
 
         # 'ENGINE': 'django.db.backends.mysql',
         # 'NAME': 'postbox',
@@ -149,18 +156,18 @@ STATIC_ROOT=os.path.join((BASE_DIR),'static')
 STATIC_URL = '/static/'
 
 
-DATABASES['default'] = dj_database_url.config()
-
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-ALLOWED_HOSTS = ['*']
-
-DEBUG = False
-
-try:
-    from .local_settings import *
-except ImportError:
-    pass
+# DATABASES['default'] = dj_database_url.config()
+#
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+#
+# ALLOWED_HOSTS = ['*']
+#
+# DEBUG = False
+#
+# try:
+#     from .local_settings import *
+# except ImportError:
+#     pass
 
 
 
