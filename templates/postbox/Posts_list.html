@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Postbox</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+  <style>
+    /* Set black background color, white text and some padding */
+    #section{position:absolute;padding-top:80px;}
+    hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid black;
+    margin: 1em 0;
+    padding: 0;
+}
+    #posts1{padding-left:230px;padding-top:10px;width:100%;}
+    #side{  z-index: 1000;  position:fixed;left:0px; top:50px; width: 200px;  height:100%;  background: #000;  overflow-y: auto;  }
+    .sidebar-nav {  position: relative;  top: 0;  width: 200px;  margin: 0;  padding: 0;  list-style: none;  margin-top: 2px;  }
+    .sidebar-nav li {  text-indent: 15px;  line-height: 40px;  }
+    .sidebar-nav li a {  display: block;  text-decoration: none;  color: #999999;  }
+    .sidebar-nav li a:hover {  text-decoration: none;  color: #fff;  background: rgba(255,255,255,0.2);border-left: red 2px solid;}
+    .sidebar-nav>li>a:focus {  color:white;  background-color:orange;  }
+    .sidebar-nav li a:active {  color:white;  background-color:orange;  }
+    .sidebar-nav > .active { color:white;  background:darkorange; }
+    footer {  background-color: #555;  color: white;  padding: 15px;  }
+
+  </style>
+
+</head>
+
+<body style="background-color:lightgrey; ">
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+
+  <div class="container-fluid">
+
+      <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+        <h4 style="font-family:'Bernard MT Condensed';color:orange;font-size:25px">POSTBOX &nbsp;&nbsp;&nbsp; </h4>
+   </div>
+
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="http://127.0.0.1:8000/postbox/{{full_name }}">NewsFeed</a></li>
+        <li class="active"><a href="http://127.0.0.1:8000/postbox/{{ full_name }}/profile/">{{full_name}}'s Profile</a></li>
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> My Account <span class="caret"></span></a>
+         <ul class="dropdown-menu">
+              <li><a href="http://127.0.0.1:8000/accounts/logout/">Logout</a></li>
+              <li><a href="#">Change Password</a></li>
+            </ul></li>
+          </ul>
+    </div>
+
+      </div>
+</nav>
+
+<div id="section" class="container text-center" >
+
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#side" >
+          <span class="glyphicon glyphicon-heart" style="color: hotpink"></span>
+      </button>
+
+
+    <div id="side">
+          <ul class="sidebar-nav" id="menu" style="list-style: none;">
+            <li><a href="http://127.0.0.1:8000/postbox/{{ full_name}}/create_category/">Add a Category<span class="glyphicon glyphicon-plus" style="color: deepskyblue"></span></a></li>
+            <li><a href="http://127.0.0.1:8000/postbox/{{ full_name}}/create_post/">Add a Post<span class="glyphicon glyphicon-plus" style="color: yellow"></span></a></li>
+            <li>&nbsp;</li>
+            <li><b style="color: hotpink">CATEGORY LIST</b></li>
+           <li><a href="http://127.0.0.1:8000/postbox/{{ full_name }}/profile/">All</a></li>
+           {% for i in categories %}
+               {% if i.id == cat %}
+                    <li class="active"> <a href="http://127.0.0.1:8000/postbox/{{ full_name}}/{{ i.owner_id }}/{{i.id}}/" style="color: white">{{ i.category }}</a></li>
+               {% elif i.id != cat %}
+                    <li> <a href="http://127.0.0.1:8000/postbox/{{ full_name}}/{{ i.owner_id }}/{{i.id}}/"> {{ i.category }}</a></li>
+               {% endif %}
+                {% empty %}
+                        <li>Sorry, you hadn't created any categories</li>
+            {% endfor %}
+          </ul>
+    </div>
+
+    <div id="posts1">
+
+          {% for i in categories %}{% if i.id == cat %}
+               <p align="left" style="font-size: 20px;font-family:'Castellar';"><b> {{i.category}}</b>&nbsp;&nbsp;&nbsp;
+               <a href="http://127.0.0.1:8000/postbox/{{ full_name}}/{{ i.id }}/edit_cat/" data-toggle="tooltip" title="Edit this category name"><span style="color: black" class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;
+            <a data-toggle="tooltip" href="http://127.0.0.1:8000/postbox/{{ full_name}}/{{ i.id }}/delete_cat/"  title="Delete this category"><span class="glyphicon glyphicon-trash" style="color: red"></span></a>
+            <br><br></p>
+          {% endif %} {% endfor %}
+
+          {% for j,i in post %}
+            <div class="row">
+
+                <div class="col-sm-16"><div class="well" style=";background:white;">
+                 <p align="left">
+                      {% load staticfiles %}
+                      <img src="{% static "postbox/bird.jpg" %}" class="img-circle" height="55" width="55" alt="Avatar"/>
+                      <b>&nbsp;&nbsp;&nbsp;{{ i.owner }}</b>&nbsp;&nbsp;&nbsp;
+                      <a href="http://127.0.0.1:8000/postbox/{{ full_name}}/{{ i.id }}/edit_post/" data-toggle="tooltip" title="Edit this post"><span style="color: black" class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;
+                      <a data-toggle="tooltip" href="http://127.0.0.1:8000/postbox/{{ full_name}}/{{ i.id }}/delete_post/"  title="Delete"><span class="glyphicon glyphicon-trash" style="color: red"></span></a>
+                      <p align="right">&nbsp; <b>Category: </b>{{ i.cid }}<b>&nbsp;&nbsp;&nbsp;&nbsp;Created on:</b>{{ i.p_date }}</p>
+                 </p>
+                   <hr>
+                  <p align="left" style="font-size:30px;font-family:'Copperplate Gothic Light';color: darkorange">{{ i.title }}</p><hr>
+                  <br>
+                  {% if  i.image %}
+                      {% for l in img %}
+                        {% if  j ==  forloop.counter0 %}
+                           {% load staticfiles %}
+                            <img src="{% static l %}" class="img-square" height="500" width=100% alt="Avatar"/><br><br>
+                        {% endif %}
+                       {% endfor %}
+                  {% endif %}
+                   <p align="left">{{i.status|safe}}</p><br>
+                    <a href="http://127.0.0.1:8000/postbox/{{ full_name }}/{{ i.owner_id }}/{{ i.cid_id }}/{{ i.id }}/comments/">Comments</a>
+
+                </div></div></div>
+               {% empty %}
+                        <li>Sorry, you hadn't created any post yet in this category</li>
+          {% endfor %}
+
+     </div>
+
+    </div>
+
+
+
+
+</body>
+</html>
+
+
+

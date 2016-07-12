@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Postbox</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <style>
+    /* Set black background color, white text and some padding */
+    body{  position: relative;  }
+    #section{padding-top:80px;}
+     hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid lightgray;
+    margin: 1em 0;
+    padding: 0;
+}
+
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+  </style>
+</head>
+<body style="background-color: lightgrey">
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+      </button>
+        <h4 style="font-family:'Bernard MT Condensed';color:orange;font-size:25px">POSTBOX &nbsp;&nbsp;&nbsp; </h4>
+   </div>
+
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li class="active"><a href="http://127.0.0.1:8000/postbox/{{full_name }}">NewsFeed</a></li>
+        <li><a href="http://127.0.0.1:8000/postbox/{{ full_name }}/profile/">{{full_name}}'s Profile</a></li>
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> My Account <span class="caret"></span></a>
+         <ul class="dropdown-menu">
+              <li><a href="http://127.0.0.1:8000/accounts/logout/">Logout</a></li>
+              <li><a href="#">Change Password</a></li>
+            </ul></li>
+          </ul>
+    </div>
+
+      </div>
+</nav>
+
+<div id="section" class="container text-center">
+
+    {% for j,i in post %}
+            <div class="row">
+
+                 <div class="col-sm-16"><div class="well" style=";background:white;">
+                 <p align="left">
+                      {% load staticfiles %}
+                      <img src="{% static "postbox/bird.jpg" %}" class="img-circle" height="55" width="55" alt="Avatar"/>
+                      <b>&nbsp;&nbsp;&nbsp;{{ i.owner }}</b>&nbsp;&nbsp;&nbsp;
+                      {% if p == i.owner_id %}
+                      <a href="http://127.0.0.1:8000/postbox/{{ full_name}}/{{ i.id }}/edit_post/" data-toggle="tooltip" title="Edit this post"><span style="color: black" class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;
+                      <a data-toggle="tooltip" href="http://127.0.0.1:8000/postbox/{{ full_name}}/{{ i.id }}/delete_post/"  title="Delete"><span class="glyphicon glyphicon-trash" style="color: red"></span></a>
+                      {% endif %}
+                     <p align="right">&nbsp;  <b>Category: </b>{{ i.cid }}<b>&nbsp;&nbsp;&nbsp;&nbsp;Created on:</b> {{ i.p_date }}</p>
+                 </p> <hr>
+
+                  <p align="left" style="font-size: 30px;font-family: 'Copperplate Gothic Light';color:darkorange">{{ i.title }}</p><hr>
+                  <br>
+                  {% if  i.image %}
+                      {% for l in img %}
+                        {% if  j ==  forloop.counter0 %}
+                           {% load staticfiles %}
+                            <img src="{% static l %}" class="img-square" height="500" width=100% alt="Avatar"/><br><br>
+                        {% endif %}
+                       {% endfor %}
+                  {% endif %}
+                 <p align="left">{{i.status|safe}}</p><br>
+
+                </div>
+                  <div class="well" style=";background:white;">
+                     <p align="left"><b>Comments</b></p> <hr>
+                     {% for k in c %}
+                         {% if k.id != cmid %}
+                     <p align="left">&nbsp;&nbsp;&nbsp;<b>{{ k.owner }}</b>&nbsp;&nbsp;&nbsp;
+                      {% if uid == k.owner_id %}
+                       <a href="http://127.0.0.1:8000/postbox/{{ full_name}}/{{ k.pid_id }}/{{ k.id }}/edit_comment/" data-toggle="tooltip" title="Edit this post"><span style="color: black" class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;
+                           <a data-toggle="tooltip" href="http://127.0.0.1:8000/postbox/{{ full_name}}/{{ k.pid_id }}/{{ k.id }}/delete_comment/"  title="Delete"><span class="glyphicon glyphicon-trash" style="color: red"></span></a>
+                      {% endif %}
+                      &nbsp; Created on: {{ k.cm_date }}
+                         </p>
+                         <p align="left">{{ k.comment }}</p> <hr>
+                         {% endif %}
+                          {% empty %}
+                        <li>no comments</li>
+                         {% endfor %}
+
+                        {% if mesg %}
+                          <p class="error">{{ mesg }}</p>
+                        {% endif %}
+
+                         <form align='left' id="comment_form" method="post" action="">
+                          {% csrf_token %}
+                          {{ form.as_p }}
+                             <input type="submit" name="submit" value="Post" />
+                          </form>
+                 </div>
+                 </div>
+
+
+
+             </div>
+          {% endfor %}
+
+</div>
+
+{#<footer class="container-fluid text-center">#}
+{#  <p>Footer Text</p>#}
+{#</footer>#}
+
+</body>
+</html>
