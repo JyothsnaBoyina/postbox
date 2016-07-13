@@ -5,6 +5,8 @@ from  django.utils import *
 from datetime import datetime
 from django.contrib.auth.models import User
 from django.utils.timezone import utc
+import pytz
+
 # Create your models here.
 
 # class Register(models.Model):
@@ -16,9 +18,6 @@ from django.utils.timezone import utc
 #
 #     def __unicode__(self):
 #         return self.id
-
-def get_utc_now():
-  return datetime.now(utc)
 
 class Categories(models.Model):
     owner=models.ForeignKey(User, on_delete=models.CASCADE,default="")
@@ -36,7 +35,7 @@ class Posts(models.Model):
     title=models.CharField(max_length=200,default="")
     status=models.TextField()
     image=models.ImageField(upload_to = 'C:/Users/Jyothsna Boyina/PycharmProjects/post/postbox/static/postbox/',null=True,default='')
-    p_date = models.DateTimeField(null=False, blank=False,default=get_utc_now())
+    p_date = models.DateTimeField(null=False, blank=False,default=datetime(pytz.utc))
 
     def __unicode__(self):
         return self.status
@@ -45,7 +44,7 @@ class Comments(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, default=" ")
     pid=models.ForeignKey(Posts, on_delete=models.CASCADE)
     comment = models.CharField(max_length=1000, default="")
-    cm_date = models.DateTimeField(null=False, blank=False, default=timezone.now)
+    cm_date = models.DateTimeField(null=False, blank=False, default=datetime.now(pytz.timezone('Asia/Calcutta')))
 
     def __unicode__(self):
         return self.comment
