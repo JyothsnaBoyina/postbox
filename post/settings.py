@@ -98,7 +98,7 @@ DATABASES = {
         'PASSWORD': 'EmafNF-oUbSlVEjt3vhh5X03-k',
         'HOST': 'ec2-54-235-90-96.compute-1.amazonaws.com',
         'PORT': '5432'
-        #
+
         # 'ENGINE': 'django.db.backends.mysql',
         # 'NAME': 'postbox',
         # 'USER': 'Jyo',
