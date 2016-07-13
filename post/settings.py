@@ -52,7 +52,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'postbox.tz.TimezoneMiddleware',
+    'postbox.tz.TimezoneMiddleware',
 ]
 
 ROOT_URLCONF = 'post.urls'
