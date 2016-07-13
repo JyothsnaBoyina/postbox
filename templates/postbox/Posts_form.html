@@ -11,11 +11,29 @@
     <script src="{% static 'js/tinymce/tinymce.min.js' %}"></script>
 {#  <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>#}
   <script>tinymce.init({ selector:'textarea' });</script>
+     <script>
+         $(document).ready(function()
+         {
+             $("#side").hide();
+             $("#menuclick").click(function(){
+                $("#side").show();
+                $("#posts2").fadeIn(0);
+                 $("#posts1").hide();
+         });
+
+              $("#posts2").click(function(){
+                   $("#side").hide();
+                   $("#posts1").show();
+                   $("#posts2").hide();
+         });
+         });
+     </script>
 
   <style>
     /* Set black background color, white text and some padding */
-    #section{position:absolute;padding-top:80px;}
-    #posts1{padding-left:230px;padding-top:10px;width:100% }
+     #posts2{opacity: 0.6; filter : alpha(opacity=60);display: none }
+    body{  position: relative;  }
+    #section{padding-top:80px;}
     #side{  z-index: 1000;  position:fixed;left:0; top:50px; width: 200px;  height:100%;  background: #000;  overflow-y: auto;  }
     .sidebar-nav {  position: relative;  top: 0;  width: 200px;  margin: 0;  padding: 0;  list-style: none;  margin-top: 2px;  }
     .sidebar-nav li {  text-indent: 15px;  line-height: 40px;  }
@@ -41,8 +59,9 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-         <h4 style="font-family:'Copperplate Gothic Light';color:orange;font-size:25px">&nbsp;&nbsp;&nbsp;POSTBOX &nbsp;&nbsp;&nbsp;</h4>
-   </div>
+     <h4 style="font-family:'Copperplate Gothic Light';color:orange;font-size:25px"> &nbsp;&nbsp;&nbsp;<a id="menuclick"><span class="glyphicon glyphicon-th-large" aria-hidden="true" style="color: lightgray"></span> </a>
+            &nbsp;&nbsp;&nbsp;POSTBOX &nbsp;&nbsp;&nbsp;</h4>
+    </div>
 
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
@@ -92,12 +111,34 @@
             <p align="left">{{ form.title.errors}}{{ form.title|bootstrap }}</p>
             <p align="left">{{ form.status.errors}}{{ form.status|bootstrap}}</p>
             <p align="left">{{ form.image.errors}}{{ form.image|bootstrap }}</p>
-         <br>
-              <button   type="submit" value="Post" class = "btn btn-success">Post</button>
+              <button   type="submit" value="Post" class = "btn btn-success">Publish</button>
 
         </form>
 
    </div>
+
+   <div id="posts2">
+
+    <h3 align="left" style="font-family: 'Copperplate Gothic Light';color:#2b669a">Create a New Post</h3>
+
+    {% if mesg %}
+    <p class="error">{{ mesg }}</p>
+{% endif %}
+
+      {% load bootstrap %}
+     <form  id="category_form" method="post" action="" enctype="multipart/form-data">
+
+            {% csrf_token %}
+            <p align="left">{{ form.cid.errors}}{{ form.cid|bootstrap}}</p>
+            <p align="left">{{ form.title.errors}}{{ form.title|bootstrap }}</p>
+            <p align="left">{{ form.status.errors}}{{ form.status|bootstrap}}</p>
+            <p align="left">{{ form.image.errors}}{{ form.image|bootstrap }}</p>
+              <button   type="submit" value="Post" class = "btn btn-success">Publish</button>
+
+        </form>
+
+   </div>
+
 </div>
 
 </body>

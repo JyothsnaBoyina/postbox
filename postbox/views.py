@@ -48,6 +48,7 @@ class Profile(ListView):
         uname=self.kwargs['uname']
         u = User.objects.filter(username=uname).values('id')
         context['posts'] = enumerate(Posts.objects.filter(owner_id=u))
+        context['post'] = enumerate(Posts.objects.filter(owner_id=u))
         context['categories'] = Categories.objects.filter(owner_id=u)
         context['full_name']=self.kwargs['uname']
         l = []
@@ -73,8 +74,10 @@ class PostList(ListView):
         context['categories'] = Categories.objects.filter(owner_id=u)
         context['full_name'] = self.kwargs['uname']
         context['cat'] = int(cid)
-        if(cid):
-         context['post'] = enumerate(Posts.objects.filter(cid_id=self.kwargs['cid']))
+        context['post'] = enumerate(Posts.objects.filter(cid_id=self.kwargs['cid']))
+        context['posts'] = enumerate(Posts.objects.filter(cid_id=self.kwargs['cid']))
+        context['categories1'] = Categories.objects.filter(owner_id=u)
+
         l=[]
         p=Posts.objects.filter(cid_id=self.kwargs['cid']).values('image')
         for i in p:
@@ -215,8 +218,6 @@ class Create_post(ListView):
                         post_form.image = self.request.FILES['image']
                     else:
                         post_form.image = ''
-                    tz= pytz.timezone('Asia/Calcutta')
-                    post_form.p_date=datetime.now(tz)
                     post_form.save()
                     return HttpResponseRedirect('/postbox/' + uname + '/profile/')
                 except Exception as e:

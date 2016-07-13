@@ -9,12 +9,29 @@
   <script src="{% static 'js/jquery-2.2.4.min.js' %}"></script>
   <script src="{% static 'bootstrap/js/bootstrap.min.js'  %}"></script>
 
+    <script>
+         $(document).ready(function()
+         {
+             $("#side").hide();
+             $("#menuclick").click(function(){
+                $("#side").show();
+                $("#posts2").fadeIn(0);
+                 $("#posts1").hide();
+         });
 
+              $("#posts2").click(function(){
+                   $("#side").hide();
+                   $("#posts1").show();
+                   $("#posts2").hide();
+         });
+         });
+     </script>
   <style>
     /* Set black background color, white text and some padding */
-    #section{position:absolute;padding-top:80px;}
-    #posts1{padding-left:230px;padding-top:10px;width:100%; }
-    #side{  z-index: 1000;  position:fixed;left:0px; top:50px; width: 200px;  height:100%;  background: #000;  overflow-y: auto;  }
+    #posts2{opacity: 0.6; filter : alpha(opacity=60);display: none }
+    body{  position: relative;  }
+    #section{padding-top:80px;}
+     #side{  z-index: 1000;  position:fixed;left:0; top:50px; width: 200px;  height:100%;  background: #000;  overflow-y: auto;  }
     .sidebar-nav {  position: relative;  top: 0;  width: 200px;  margin: 0;  padding: 0;  list-style: none;  margin-top: 2px;  }
     .sidebar-nav li {  text-indent: 15px;  line-height: 40px;  }
     .sidebar-nav li a {  display: block;  text-decoration: none;  color: #999999;  }
@@ -39,7 +56,8 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-        <h4 style="font-family:'Copperplate Gothic Light';color:orange;font-size:25px">&nbsp;&nbsp;&nbsp;POSTBOX &nbsp;&nbsp;&nbsp;</h4>
+        <h4 style="font-family:'Copperplate Gothic Light';color:orange;font-size:25px"> &nbsp;&nbsp;&nbsp;<a id="menuclick"><span class="glyphicon glyphicon-th-large" aria-hidden="true" style="color: lightgray"></span> </a>
+            &nbsp;&nbsp;&nbsp;POSTBOX &nbsp;&nbsp;&nbsp;</h4>
    </div>
 
     <div class="collapse navbar-collapse" id="myNavbar">
@@ -76,6 +94,32 @@
     </div>
 
     <div id="posts1">
+
+    <h3 style="font-family: 'Copperplate Gothic Light';color:#2b669a"> Create a New Category</h3><br><br>
+
+    {% if message %}
+    <p class="error">That category already exists</p>
+{% endif %}
+
+     <form  id="category_form" method="post" action="">
+
+            {% csrf_token %}
+            {% if mesg %}
+    <p class="error"><p style="color: red"> Warning! </p> category already exists.Please enter a new one!</p>
+{% endif %}
+             {% load bootstrap %}
+            {% for field in form.visible_fields %}
+                {{ field.errors }}
+                {{ field|bootstrap}}
+            {% endfor %}
+
+              <button type="submit" value="Post" class = "btn btn-success">Add</button>
+
+        </form>
+
+   </div>
+
+<div id="posts2">
 
     <h3 style="font-family: 'Copperplate Gothic Light';color:#2b669a"> Create a New Category</h3><br><br>
 

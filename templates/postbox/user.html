@@ -9,12 +9,31 @@
   <script src="{% static 'js/jquery-2.2.4.min.js' %}"></script>
   <script src="{% static 'bootstrap/js/bootstrap.min.js'  %}"></script>
 
+    <script>
+         $(document).ready(function()
+         {
+             $("#side").hide();
+             $("#menuclick").click(function(){
+                $("#side").show();
+                $("#posts2").fadeIn(0);
+                 $("#posts1").hide();
+         });
+
+              $("#posts2").click(function(){
+                   $("#side").hide();
+                   $("#posts1").show();
+                   $("#posts2").hide();
+         });
+         });
+     </script>
+
+
 
   <style>
     /* Set black background color, white text and some padding */
-    #section{position:absolute;padding-top:80px;}
-    #posts1{padding-left:230px;padding-top:10px;width:100%;}
-    hr {  display: block;  height: 1px;  border: 0;  border-top: 1px solid black;  margin: 1em 0;  padding: 0;  }
+    #posts2{opacity: 0.6; filter : alpha(opacity=60);display: none }
+    body{  position: relative;  }
+    #section{padding-top:80px;} hr {  display: block;  height: 1px;  border: 0;  border-top: 1px solid black;  margin: 1em 0;  padding: 0;  }
     #side{z-index:1000;position:fixed;left:0px; top:50px; width: 200px;  height:100%;  background: #000;  overflow-y: auto;  }
     .sidebar-nav {  position: relative;  top: 0;  width: 200px;  margin: 0;  padding: 0;  list-style: none;  margin-top: 2px;  }
     .sidebar-nav li {  text-indent: 15px;  line-height: 40px;  }
@@ -41,7 +60,8 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-        <h4 style="font-family:'Copperplate Gothic Light';color:orange;font-size:25px">&nbsp;&nbsp;&nbsp;POSTBOX &nbsp;&nbsp;&nbsp;</h4>
+      <h4 style="font-family:'Copperplate Gothic Light';color:orange;font-size:25px"> &nbsp;&nbsp;&nbsp;<a id="menuclick"><span class="glyphicon glyphicon-th-large" aria-hidden="true" style="color: lightgray"></span> </a>
+            &nbsp;&nbsp;&nbsp;POSTBOX &nbsp;&nbsp;&nbsp;</h4>
    </div>
 
     <div class="collapse navbar-collapse" id="myNavbar">
@@ -97,7 +117,7 @@
                       {% for l in img %}
                         {% if  j ==  forloop.counter0 %}
                            {% load staticfiles %}
-                            <img src="{% static l %}" class="img-square" height="500" width=100% alt="Avatar"/><br><br>
+                            <img src="{% static l %}" class="img-square" height="500" width=80% alt="Avatar"/><br><br>
                         {% endif %}
                        {% endfor %}
                   {% endif %}
@@ -110,6 +130,42 @@
           {% endfor %}
 
      </div>
+
+      <div id="posts2">
+
+          {% for j,i in post %}
+            <div class="row">
+
+                <div class="col-lg-16"><div class="well" style=";background:white;">
+                 <p align="left">
+                      {% load staticfiles %}
+                      <img src="{% static "postbox/bird.jpg" %}" class="img-circle" height="55" width="55" alt="Avatar"/>
+                      <b style="font-family: 'Copperplate Gothic Light';color: #2b669a">&nbsp;&nbsp;&nbsp;{{ i.owner }}</b>&nbsp;&nbsp;&nbsp;
+                      <a href="/postbox/{{ full_name}}/{{ i.id }}/edit_post/" data-toggle="tooltip" title="Edit this post"><span style="color: black" class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;
+                      <a data-toggle="tooltip" href="/postbox/{{ full_name}}/{{ i.id }}/delete_post/"  title="Delete"><span class="glyphicon glyphicon-trash" style="color: red"></span></a>
+                      <p align="right" style="font-family: 'Copperplate Gothic Light';color: green">&nbsp; <b >Category: </b>{{ i.cid }}<b>&nbsp;&nbsp;&nbsp;&nbsp;Created on:</b>{{ i.p_date }}</p>
+                 </p>
+                   <hr>
+                  <p align="left" style="font-size:30px;font-family:'Copperplate Gothic Light';color: darkorange">{{ i.title }}</p><hr>
+                  <br>
+                  {% if  i.image %}
+                      {% for l in img %}
+                        {% if  j ==  forloop.counter0 %}
+                           {% load staticfiles %}
+                            <img src="{% static l %}" class="img-square" height="500" width=80% alt="Avatar"/><br><br>
+                        {% endif %}
+                       {% endfor %}
+                  {% endif %}
+                   <p align="left">{{i.status|safe}}</p><br>
+                    <a href="/postbox/{{ full_name }}/{{ i.cid_id }}/{{ i.id }}/comments/">Comments</a>
+
+                </div></div></div>
+               {% empty %}
+                        <p>Sorry, no posts</p>
+          {% endfor %}
+
+     </div>
+
     </div>
 
 

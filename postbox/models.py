@@ -33,7 +33,7 @@ class Posts(models.Model):
     owner=models.ForeignKey(User, on_delete=models.CASCADE,default=" ")
     cid=models.ForeignKey(Categories, on_delete=models.CASCADE)
     title=models.CharField(max_length=200,default="")
-    status=models.TextField()
+    status=models.TextField(default='',null=True)
     image=models.ImageField(upload_to = 'C:/Users/Jyothsna Boyina/PycharmProjects/post/postbox/static/postbox/',null=True,default='')
     p_date = models.DateTimeField(null=False, blank=False,default=datetime.now)
 
@@ -44,7 +44,6 @@ class Comments(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, default=" ")
     pid=models.ForeignKey(Posts, on_delete=models.CASCADE)
     comment = models.CharField(max_length=1000, default="")
-    tz=pytz.timezone('Asia/Calcutta')
     cm_date = models.DateTimeField(null=False, blank=False, default=datetime.now)
 
     def __unicode__(self):

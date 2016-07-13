@@ -14,7 +14,6 @@ class PostsForm(ModelForm):
         super(PostsForm, self).__init__(*args, **kwargs)
         self.fields['cid'] = forms.ModelChoiceField( queryset=Categories.objects.filter(owner=uname),help_text='category')
         self.fields['image']=forms.ImageField(required=False)
-
     class Meta:
         model = Posts
         fields = ['title','status','cid','image']
