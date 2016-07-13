@@ -12,16 +12,9 @@
   <style>
     /* Set black background color, white text and some padding */
     #section{position:absolute;padding-top:80px;}
-    hr {
-    display: block;
-    height: 1px;
-    border: 0;
-    border-top: 1px solid darkgray;
-    margin: 1em 0;
-    padding: 0;
-}
+    hr {  display: block;  height: 1px;  border: 0;  border-top: 1px solid darkgray;  margin: 1em 0;  padding: 0;  }
     #posts1{padding-left:230px;padding-top:10px;width:100%;}
-    #side{  z-index: 1000;  position:fixed;left:0px; top:50px; width: 200px;  height:100%;  background: #000;  overflow-y: auto;  }
+    #side{  z-index: 1000;  position:fixed;left:0; top:50px; width: 200px;  height:100%;  background: #000;  overflow-y: auto;  }
     .sidebar-nav {  position: relative;  top: 0;  width: 200px;  margin: 0;  padding: 0;  list-style: none;  margin-top: 2px;  }
     .sidebar-nav li {  text-indent: 15px;  line-height: 40px;  }
     .sidebar-nav li a {  display: block;  text-decoration: none;  color: #999999;  }
@@ -47,16 +40,16 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-        <h4 style="font-family:'Bernard MT Condensed';color:orange;font-size:25px">POSTBOX &nbsp;&nbsp;&nbsp; </h4>
+         <h4 style="font-family:'Copperplate Gothic Light';color:orange;font-size:25px">&nbsp;&nbsp;&nbsp;POSTBOX &nbsp;&nbsp;&nbsp;</h4>
    </div>
 
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="http://127.0.0.1:8000/postbox/{{full_name }}">NewsFeed</a></li>
-        <li class="active"><a href="http://127.0.0.1:8000/postbox/{{ full_name }}/profile/">{{full_name}}'s Profile</a></li>
+        <li><a href="/postbox/">NewsFeed</a></li>
+        <li class="active"><a href="/postbox/{{ full_name }}/profile/">{{full_name}}'s Profile</a></li>
         <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> My Account <span class="caret"></span></a>
          <ul class="dropdown-menu">
-              <li><a href="http://127.0.0.1:8000/accounts/logout/">Logout</a></li>
+              <li><a href="/accounts/logout/">Logout</a></li>
               <li><a href="#">Change Password</a></li>
             </ul></li>
           </ul>
@@ -74,16 +67,16 @@
 
     <div id="side">
           <ul class="sidebar-nav" id="menu" style="list-style: none;">
-            <li><a href="http://127.0.0.1:8000/postbox/{{ full_name}}/create_category/">Add a Category<span class="glyphicon glyphicon-plus" style="color: deepskyblue"></span></a></li>
-            <li><a href="http://127.0.0.1:8000/postbox/{{ full_name}}/create_post/">Add a Post<span class="glyphicon glyphicon-plus" style="color: yellow"></span></a></li>
+            <li><a href="/postbox/{{ full_name}}/create_category/">Add a Category<span class="glyphicon glyphicon-plus" style="color: deepskyblue"></span></a></li>
+            <li><a href="/postbox/{{ full_name}}/create_post/">Add a Post<span class="glyphicon glyphicon-plus" style="color: yellow"></span></a></li>
             <li>&nbsp;</li>
             <li><b style="color: hotpink">CATEGORY LIST</b></li>
-           <li><a href="http://127.0.0.1:8000/postbox/{{ full_name }}/profile/">All</a></li>
+           <li><a href="/postbox/{{ full_name }}/profile/">All</a></li>
            {% for i in categories %}
                {% if i.id == cat %}
-                    <li class="active"> <a href="http://127.0.0.1:8000/postbox/{{ full_name}}/{{ i.owner_id }}/{{i.id}}/" style="color: white">{{ i.category }}</a></li>
+                    <li class="active"> <a href="/postbox/{{ full_name}}/{{i.id}}/" style="color: white">{{ i.category }}</a></li>
                {% elif i.id != cat %}
-                    <li> <a href="http://127.0.0.1:8000/postbox/{{ full_name}}/{{ i.owner_id }}/{{i.id}}/"> {{ i.category }}</a></li>
+                    <li> <a href="/postbox/{{ full_name}}/{{i.id}}/"> {{ i.category }}</a></li>
                {% endif %}
                 {% empty %}
                         <li>Sorry, you hadn't created any categories </li>
@@ -100,10 +93,10 @@
                  <p align="left">
                       {% load staticfiles %}
                       <img src="{% static "postbox/bird.jpg" %}" class="img-circle" height="55" width="55" alt="Avatar"/>
-                      <b>&nbsp;&nbsp;&nbsp;{{ i.owner }}</b>&nbsp;&nbsp;&nbsp;
-                      <a href="http://127.0.0.1:8000/postbox/{{ full_name}}/{{ i.id }}/edit_post/" data-toggle="tooltip" title="Edit this post"><span style="color: black" class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;
-                      <a data-toggle="tooltip" href="http://127.0.0.1:8000/postbox/{{ full_name}}/{{ i.id }}/delete_post/"  title="Delete"><span class="glyphicon glyphicon-trash" style="color: red"></span></a>
-                      <p align="right">&nbsp; <b>Category: </b>{{ i.cid }}<b>&nbsp;&nbsp;&nbsp;&nbsp;Created on:</b> {{ i.p_date }}</p>
+                      <b style="font-family: 'Copperplate Gothic Light';color:#2b669a">&nbsp;&nbsp;&nbsp;{{ i.owner }}</b>&nbsp;&nbsp;&nbsp;
+                      <a href="/postbox/{{ full_name}}/{{ i.id }}/edit_post/" data-toggle="tooltip" title="Edit this post"><span style="color: black" class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;
+                      <a data-toggle="tooltip" href="/postbox/{{ full_name}}/{{ i.id }}/delete_post/"  title="Delete"><span class="glyphicon glyphicon-trash" style="color: red"></span></a>
+                      <p align="right" style="font-family: 'Copperplate Gothic Light';color:green">&nbsp; <b>Category: </b>{{ i.cid }}<b>&nbsp;&nbsp;&nbsp;&nbsp;Created on:</b> {{ i.p_date }}</p>
                  </p>
                    <hr style="color: #999999">
                   <p align="left" style="font-size: 30px;font-family: 'Copperplate Gothic Light';color: darkorange">{{ i.title }}</p><hr>
@@ -123,17 +116,17 @@
                      <p align="left"><b>Comments</b></p> <hr>
                      {% for k in c %}
                          {% if k.id != cmid %}
-                     <p align="left">&nbsp;&nbsp;&nbsp;<b>{{ k.owner }}</b>&nbsp;&nbsp;&nbsp;
+                     <p align="left">&nbsp;&nbsp;&nbsp;<b style="font-family: 'Copperplate Gothic Light';color:#2b669a">{{ k.owner }}</b>&nbsp;&nbsp;&nbsp;
                       {% if uid == k.owner_id %}
-                       <a href="http://127.0.0.1:8000/postbox/{{ full_name}}/{{ k.owner_id }}/{{ cat }}/{{ k.pid_id }}/{{ k.id }}/edit_comment/" data-toggle="tooltip" title="Edit this post"><span style="color: black" class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;
-                           <a data-toggle="tooltip" href="http://127.0.0.1:8000/postbox/{{ full_name}}/{{ k.owner_id }}/{{ cat }}/{{ k.pid_id }}/{{ k.id }}/delete_comment/"  title="Delete"><span class="glyphicon glyphicon-trash" style="color: red"></span></a>
+                       <a href="/postbox/{{ full_name}}/{{ cat }}/{{ k.pid_id }}/{{ k.id }}/edit_comment/" data-toggle="tooltip" title="Edit this post"><span style="color: black" class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;
+                           <a data-toggle="tooltip" href="/postbox/{{ full_name}}/{{ cat }}/{{ k.pid_id }}/{{ k.id }}/delete_comment/"  title="Delete"><span class="glyphicon glyphicon-trash" style="color: red"></span></a>
                       {% endif %}
                       &nbsp; Created on: {{ k.cm_date }}
                          </p>
                          <p align="left">{{ k.comment }}</p> <hr>
                          {% endif %}
                           {% empty %}
-                        <li>no comments</li>
+                        <p>no comments</p>
                          {% endfor %}
 
                         {% if mesg %}
@@ -142,8 +135,10 @@
 
                          <form align='left' id="comment_form" method="post" action="">
                           {% csrf_token %}
-                          {{ form.as_p }}
-                             <input type="submit" name="submit" value="Post" />
+                             {% load bootstrap %}
+                          {{ form|bootstrap }}
+                               <button   type="submit" value="Post" class = "btn btn-success">Add</button>
+
                           </form>
                  </div>
                 </div></div>

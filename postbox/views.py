@@ -20,13 +20,16 @@ class Newsfeed(ListView):
     def get_context_data(self, **kwargs):
         context = super(Newsfeed, self).get_context_data(**kwargs)
         context['posts'] = enumerate(Posts.objects.all())
-        u = User.objects.filter(username=self.kwargs['uname']).values('id')
+        context['post'] = enumerate(Posts.objects.all())
+        uname=self.request._cached_user.username
+        u = User.objects.filter(username=uname).values('id')
+        context['categories'] = Categories.objects.filter(owner_id=u)
         p=u[0].values()
         context['p']=p[0]
-        context['full_name'] = self.kwargs['uname']
+        context['full_name'] = uname
         l = []
-        p = Posts.objects.values('image')
-        for i in p:
+        p1 = Posts.objects.values('image')
+        for i in p1:
             s = i.values()[0]
             lst = s.split('/', s.count('/'))
             string = 'postbox/' + lst[-1]
@@ -44,18 +47,16 @@ class Profile(ListView):
         uname=self.kwargs['uname']
         u = User.objects.filter(username=uname).values('id')
         context['posts'] = enumerate(Posts.objects.filter(owner_id=u))
-        context['post'] = enumerate(Posts.objects.filter(owner_id=u))
         context['categories'] = Categories.objects.filter(owner_id=u)
         context['full_name']=self.kwargs['uname']
         l = []
-        p = Posts.objects.values('image')
-        for i in p:
+        p1 = Posts.objects.filter(owner_id=u[0].values()[0]).values('image')
+        for i in p1:
             s = i.values()[0]
             lst = s.split('/', s.count('/'))
             string = 'postbox/' + lst[-1]
             l.append(string)
         context['img'] = l
-
         return context
 
 class PostList(ListView):
@@ -113,7 +114,7 @@ class CreateCat(ListView):
                     p = u[0].values()
                     cat_form.owner_id = p[0]
                     cat_form.save()
-                    return HttpResponseRedirect('http://127.0.0.1:8000/postbox/' + uname + '/profile/')
+                    return HttpResponseRedirect('/postbox/' + uname + '/profile/')
                 except Exception as e:
                     mesg = 'save_invalid'
                     return render_to_response('postbox/Categories_form.html',
@@ -163,7 +164,7 @@ class edit_cat(ListView):
                     p = u[0].values()
                     cat_form.owner_id = p[0]
                     cat_form.save()
-                    return HttpResponseRedirect('http://127.0.0.1:8000/postbox/' + uname + '/profile/')
+                    return HttpResponseRedirect('/postbox/' + uname + '/profile/')
                 except Exception as e:
                     mesg = 'save_invalid'
                     return render_to_response('postbox/Categories_form.html',
@@ -214,7 +215,7 @@ class Create_post(ListView):
                     else:
                         post_form.image = ''
                     post_form.save()
-                    return HttpResponseRedirect('http://127.0.0.1:8000/postbox/' + uname + '/profile/')
+                    return HttpResponseRedirect('/postbox/' + uname + '/profile/')
                 except Exception as e:
                     mesg = 'save_invalid'
                     return render_to_response('postbox/Posts_form.html',
@@ -260,7 +261,7 @@ class Edit_post(ListView):
 
         if self.request.method == 'POST':
             p = u[0].values()
-            form = PostsForm(p[0], self.request.POST, self.request.FILES, instance=post)
+            form = PostsForm(p[0], self.request.POST, self.request.FILES,instance=post)
             if form.is_valid():
                 try:
                     post_form = form.save(commit=False)
@@ -268,7 +269,7 @@ class Edit_post(ListView):
                     if len(self.request.FILES) != 0:
                         post_form.image = self.request.FILES['image']
                     post_form.save()
-                    return HttpResponseRedirect('http://127.0.0.1:8000/postbox/' + uname + '/profile/')
+                    return HttpResponseRedirect('/postbox/' + uname + '/profile/')
                 except Exception as e:
                     mesg = 'save_invalid'
                     return render_to_response('postbox/Posts_form.html',
@@ -311,7 +312,7 @@ class CommentList(ListView):
             l.append(string)
         context['img']=l
         context['c']=Comments.objects.filter(pid=self.kwargs['pid'])
-        context['uid']=int(self.kwargs.get('uid'))
+        context['uid']=u[0].values()[0]
         context['pid'] = int(self.kwargs.get('pid'))
         form = CommentForm()
         context['form'] = form
@@ -320,7 +321,6 @@ class CommentList(ListView):
     def post(self,*args,**kwargs):
       uname = kwargs.get('uname')
       pid=int(kwargs.get('pid'))
-      uid=int(kwargs.get('uid'))
       cat=int(kwargs.get('cid'))
 
       post=enumerate(Posts.objects.filter(id=kwargs['pid']))
@@ -334,6 +334,7 @@ class CommentList(ListView):
           l.append(string)
 
       u = User.objects.filter(username=uname).values('id')
+      uid=u[0].values()[0]
       categories = Categories.objects.filter(owner_id=u)
       context = RequestContext(self.request)
 
@@ -342,10 +343,10 @@ class CommentList(ListView):
             if form.is_valid():
                 try:
                     cm_form = form.save(commit=False)
-                    cm_form.owner_id =int(kwargs.get('uid'))
+                    cm_form.owner_id =uid
                     cm_form.pid_id=int(kwargs.get('pid'))
                     cm_form.save()
-                    return HttpResponseRedirect('http://127.0.0.1:8000/postbox/' + uname + '/'+kwargs.get('uid')+'/'+kwargs.get('cid')+'/'+kwargs.get('pid')+'/comments')
+                    return HttpResponseRedirect('/postbox/' + uname +'/'+kwargs.get('cid')+'/'+kwargs.get('pid')+'/comments')
                 except Exception as e:
                      mesg = 'save_invalid'
                      return render_to_response('postbox/Comments_list.html',
@@ -365,6 +366,7 @@ class CommentList1(ListView):
         uname = self.kwargs['uname']
         u = User.objects.filter(username=uname).values('id')
         context['full_name'] = self.kwargs['uname']
+        context['categories'] = Categories.objects.filter(owner_id=u)
         context['post'] = enumerate(Posts.objects.filter(id=self.kwargs['pid']))
         l=[]
         p=Posts.objects.filter(id=self.kwargs['pid']).values('image')
@@ -384,7 +386,6 @@ class CommentList1(ListView):
     def post(self,*args,**kwargs):
       uname = kwargs.get('uname')
       pid=int(kwargs.get('pid'))
-      uid=int(kwargs.get('uid'))
 
       post=enumerate(Posts.objects.filter(id=kwargs['pid']))
       c=Comments.objects.filter(pid=kwargs['pid'])
@@ -397,6 +398,8 @@ class CommentList1(ListView):
           l.append(string)
 
       u = User.objects.filter(username=uname).values('id')
+      uid=u[0].values()[0]
+      categories = Categories.objects.filter(owner_id=uid)
       context = RequestContext(self.request)
 
       if self.request.method == 'POST':
@@ -404,18 +407,18 @@ class CommentList1(ListView):
             if form.is_valid():
                 try:
                     cm_form = form.save(commit=False)
-                    cm_form.owner_id =int(kwargs.get('uid'))
+                    cm_form.owner_id =uid
                     cm_form.pid_id=int(kwargs.get('pid'))
                     cm_form.save()
-                    return HttpResponseRedirect('http://127.0.0.1:8000/postbox/' + uname + '/'+kwargs.get('uid')+'/'+kwargs.get('pid')+'/comments')
+                    return HttpResponseRedirect('/postbox/' + uname +'/'+kwargs.get('pid')+'/comments')
                 except Exception as e:
                      mesg = 'save_invalid'
                      return render_to_response('postbox/Comments_list1.html',
                                       {'mesg': mesg, 'form': form, 'full_name': uname,
-                                       'pid': pid, 'uid': uid, 'post': post, 'c': c, 'img': l,}, context)
+                                       'pid': pid, 'uid': uid, 'post': post, 'c': c, 'img': l,'categories':categories}, context)
             else:
                 mesg = 'form_invalid'
-                return render_to_response('postbox/Comments_list1.html', {'mesg': mesg, 'form': form, 'full_name': uname,'pid':pid,'uid':uid,'post':post,'c':c,'img':l},context)
+                return render_to_response('postbox/Comments_list1.html', {'mesg': mesg, 'form': form,'categories':categories, 'full_name': uname,'pid':pid,'uid':uid,'post':post,'c':c,'img':l},context)
 
 class EditComment(ListView):
     model = Comments
@@ -427,7 +430,6 @@ class EditComment(ListView):
         uname = self.kwargs['uname']
         pid = int(self.kwargs['pid'])
         cat = int(self.kwargs['cid'])
-        uid = int(self.kwargs['uid'])
         cmid = int(self.kwargs['cmid'])
         comment = get_object_or_404(Comments, id=cmid)
         post = enumerate(Posts.objects.filter(id=pid))
@@ -441,6 +443,7 @@ class EditComment(ListView):
             l.append(string)
 
         u = User.objects.filter(username=uname).values('id')
+        uid=u[0].values()[0]
         categories = Categories.objects.filter(owner_id=u)
         context['form'] = CommentForm(instance=comment)
         context['full_name']=uname
@@ -458,11 +461,8 @@ class EditComment(ListView):
         uname = self.kwargs['uname']
         pid = int(self.kwargs['pid'])
         cat = int(self.kwargs['cid'])
-        uid = int(self.kwargs['uid'])
         cmid = int(self.kwargs['cmid'])
         comment = get_object_or_404(Comments, id=cmid)
-        p_id = int(pid)
-        u_id = int(uid)
         post = enumerate(Posts.objects.filter(id=pid))
         c = Comments.objects.filter(pid=pid)
         l = []
@@ -474,6 +474,7 @@ class EditComment(ListView):
             l.append(string)
 
         u = User.objects.filter(username=uname).values('id')
+        uid=u[0].values()[0]
         categories = Categories.objects.filter(owner_id=u)
         context = RequestContext(self.request)
 
@@ -482,23 +483,23 @@ class EditComment(ListView):
             if form.is_valid():
                 try:
                     cm_form = form.save(commit=False)
-                    cm_form.owner_id = u_id
-                    cm_form.pid_id = p_id
+                    cm_form.owner_id = uid
+                    cm_form.pid_id = pid
                     cm_form.save()
                     return HttpResponseRedirect(
-                        'http://127.0.0.1:8000/postbox/' + uname + '/' + self.kwargs['uid'] + '/' + self.kwargs['cid'] + '/' + self.kwargs['pid'] + '/comments')
+                        '/postbox/' + uname + '/' + self.kwargs['cid'] + '/' + self.kwargs['pid'] + '/comments')
                 except Exception as e:
                     mesg = 'save_invalid'
                     return render_to_response('postbox/Comments_list.html',
                                               {'mesg': mesg, 'form': form, 'full_name': uname, 'categories': categories,
-                                               'pid': p_id, 'uid': u_id, 'cat': cat, 'post': post, 'c': c, 'img': l,
-                                               'cmid': int(cmid)}, context)
+                                               'pid': pid, 'uid': uid, 'cat': cat, 'post': post, 'c': c, 'img': l,
+                                               'cmid': cmid}, context)
             else:
                 mesg = 'form_invalid'
                 return render_to_response('postbox/Comments_list.html',
                                           {'mesg': mesg, 'form': form, 'full_name': uname, 'categories': categories,
-                                           'pid': p_id, 'uid': u_id, 'cat': cat, 'post': post, 'c': c, 'img': l,
-                                           'cmid': int(cmid)}, context)
+                                           'pid': pid, 'uid': uid, 'cat': cat, 'post': post, 'c': c, 'img': l,
+                                           'cmid': cmid}, context)
 
 class EditComment1(ListView):
     model = Comments
@@ -530,6 +531,7 @@ class EditComment1(ListView):
         context['post'] = post
         context['img'] = l
         context['c'] = c
+        context['categories'] = Categories.objects.filter(owner_id=u)
         context['cmid'] = cmid
         return context
 
@@ -539,9 +541,9 @@ class EditComment1(ListView):
         cmid = int(self.kwargs['cmid'])
         comment = get_object_or_404(Comments, id=cmid)
         u = User.objects.filter(username=uname).values('id')
-        p_id = int(pid)
-        u_id = u[0].values()[0]
+        uid = u[0].values()[0]
         post = enumerate(Posts.objects.filter(id=pid))
+        categories= Categories.objects.filter(owner_id=u)
         c = Comments.objects.filter(pid=pid)
         l = []
         p = Posts.objects.filter(id=pid).values('image')
@@ -558,24 +560,23 @@ class EditComment1(ListView):
             if form.is_valid():
                 try:
                     cm_form = form.save(commit=False)
-                    cm_form.owner_id = u_id
-                    cm_form.pid_id = p_id
+                    cm_form.owner_id = int(uid)
+                    cm_form.pid_id = int(pid)
                     cm_form.save()
                     return HttpResponseRedirect(
-                        'http://127.0.0.1:8000/postbox/' + uname + '/' + str(u_id) + '/' +self.kwargs['pid'] + '/comments')
+                        '/postbox/' + uname + '/' +self.kwargs['pid'] + '/comments')
                 except Exception as e:
                     mesg = 'save_invalid'
                     return render_to_response('postbox/Comments_list1.html',
                                               {'mesg': mesg, 'form': form, 'full_name': uname,
-                                               'pid': p_id, 'uid': u_id, 'post': post, 'c': c, 'img': l,
-                                               'cmid': int(cmid)}, context)
+                                               'pid': pid, 'uid': uid, 'post': post, 'c': c, 'img': l,
+                                               'cmid': cmid, 'categories':categories}, context)
             else:
                 mesg = 'form_invalid'
                 return render_to_response('postbox/Comments_list1.html',
                                           {'mesg': mesg, 'form': form, 'full_name': uname,
-                                           'pid': p_id, 'uid': u_id, 'post': post, 'c': c, 'img': l, 'cmid': int(cmid)},
+                                           'pid': pid, 'uid': uid, 'post': post, 'c': c, 'img': l, 'cmid':cmid,'categories':categories},
                                           context)
-
 
 def login(request):
     c={}
@@ -589,17 +590,19 @@ def auth_view(request):
 
     if user is not None:
         auth.login(request,user)
-        return HttpResponseRedirect('/postbox/'+username+'/')
+        return HttpResponseRedirect('/postbox/')
     else:
         return HttpResponseRedirect('/accounts/invalid/')
 
 def invalid_login(request):
      return render_to_response('registration/invalid.html')
 
+def base(request):
+    return HttpResponseRedirect('/accounts/login/')
+
 def logout(request):
     auth.logout(request)
-    render_to_response('registration/login.html')
-    return HttpResponseRedirect('/')
+    return HttpResponseRedirect('/accounts/login/')
 
 def register_user(request):
     context=RequestContext(request)
@@ -624,19 +627,17 @@ def register_user(request):
     print args
     return render_to_response('registration/register.html',args)
 
-def delete_post(request, uname, cid, uid, pid):
+def delete_post(request, uname, pid):
     note = get_object_or_404(Posts, id=pid).delete()
     return HttpResponseRedirect('http://127.0.0.1:8000/postbox/' + uname + '/profile')
 
-def delete_comment(request,uname,cid,uid,pid,cmid):
+def delete_comment(request,uname,cid,pid,cmid):
     note = get_object_or_404(Comments, id=cmid).delete()
-    return HttpResponseRedirect('http://127.0.0.1:8000/postbox/'+uname+'/'+uid+'/'+cid+'/'+pid+'/comments/')
+    return HttpResponseRedirect('http://127.0.0.1:8000/postbox/'+uname+'/'+cid+'/'+pid+'/comments/')
 
 def delete_comment1(request,uname,pid,cmid):
-    u = User.objects.filter(username=uname).values('id')
-    p=str(u[0].values()[0])
     note = get_object_or_404(Comments, id=cmid).delete()
-    return HttpResponseRedirect('http://127.0.0.1:8000/postbox/'+uname+'/'+p+'/'+pid+'/comments/')
+    return HttpResponseRedirect('http://127.0.0.1:8000/postbox/'+uname+'/'+pid+'/comments/')
 
 def delete_cat(request,uname,cid):
     note = get_object_or_404(Categories, id=cid).delete()

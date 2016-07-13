@@ -8,37 +8,13 @@
    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
   <script src="{% static 'js/jquery-2.2.4.min.js' %}"></script>
   <script src="{% static 'bootstrap/js/bootstrap.min.js'  %}"></script>
-   <script>
-         $(document).ready(function()
-         {
-             $("#side").hide();
-             $("#menuclick").click(function(){
-                $("#side").show();
-                $("#posts2").fadeIn(0);
-                 $("#posts1").hide();
-         });
 
-              $("#posts2").click(function(){
-                   $("#side").hide();
-                   $("#posts1").show();
-                   $("#posts2").hide();
-         });
-         });
-     </script>
 
   <style>
     /* Set black background color, white text and some padding */
-    #section{position:relative;padding-top:80px;}
-    hr {
-    display: block;
-    height: 1px;
-    border: 0;
-    border-top: 1px solid black;
-    margin: 1em 0;
-    padding: 0;
-}
-     #posts2{padding-top:10px;width:100%;opacity: 0.6; filter : alpha(opacity=60);display: none }
-    #posts1{padding-top:10px;width:100%;}
+    #section{position:absolute;padding-top:80px;}
+    #posts1{padding-left:230px;padding-top:10px;width:100%;}
+    hr {  display: block;  height: 1px;  border: 0;  border-top: 1px solid black;  margin: 1em 0;  padding: 0;  }
     #side{z-index:1000;position:fixed;left:0px; top:50px; width: 200px;  height:100%;  background: #000;  overflow-y: auto;  }
     .sidebar-nav {  position: relative;  top: 0;  width: 200px;  margin: 0;  padding: 0;  list-style: none;  margin-top: 2px;  }
     .sidebar-nav li {  text-indent: 15px;  line-height: 40px;  }
@@ -65,19 +41,16 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-        <h4 style="font-family:'Bernard MT Condensed';color:orange;font-size:25px"> &nbsp;&nbsp;&nbsp;<a id="menuclick"><span class="glyphicon glyphicon-th-large" aria-hidden="true" style="color: lightgray"></span> </a>
-            &nbsp;&nbsp;&nbsp;POSTBOX &nbsp;&nbsp;&nbsp;
-
-        </h4>
+        <h4 style="font-family:'Copperplate Gothic Light';color:orange;font-size:25px">&nbsp;&nbsp;&nbsp;POSTBOX &nbsp;&nbsp;&nbsp;</h4>
    </div>
 
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="http://127.0.0.1:8000/postbox/{{full_name }}">NewsFeed</a></li>
-        <li class="active"><a href="http://127.0.0.1:8000/postbox/{{ full_name }}/profile/">{{full_name}}'s Profile</a></li>
+        <li><a href="/postbox/">NewsFeed</a></li>
+        <li class="active"><a href="/postbox/{{ full_name }}/profile/">{{full_name}}'s Profile</a></li>
         <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> My Account <span class="caret"></span></a>
          <ul class="dropdown-menu">
-              <li><a href="http://127.0.0.1:8000/accounts/logout/">Logout</a></li>
+              <li><a href="/accounts/logout/">Logout</a></li>
               <li><a href="#">Change Password</a></li>
             </ul></li>
           </ul>
@@ -90,13 +63,13 @@
 
     <div id="side">
           <ul class="sidebar-nav" id="menu" style="list-style: none;">
-            <li><a href="http://127.0.0.1:8000/postbox/{{ full_name}}/create_category/">Add a Category<span class="glyphicon glyphicon-plus" style="color: deepskyblue"></span></a></li>
-            <li><a href="http://127.0.0.1:8000/postbox/{{ full_name}}/create_post/">Add a Post<span class="glyphicon glyphicon-plus" style="color: yellow"></span></a></li>
+            <li><a href="/postbox/{{ full_name}}/create_category/">Add a Category<span class="glyphicon glyphicon-plus" style="color: deepskyblue"></span></a></li>
+            <li><a href="/postbox/{{ full_name}}/create_post/">Add a Post<span class="glyphicon glyphicon-plus" style="color: yellow"></span></a></li>
             <li>&nbsp;</li>
             <li><b style="color: hotpink">CATEGORY LIST</b></li>
-           <li class="active"><a href="http://127.0.0.1:8000/postbox/{{ full_name }}/profile/" style="color: white">All</a></li>
+           <li class="active"><a href="/postbox/{{ full_name }}/profile/" style="color: white">All</a></li>
            {% for i in categories %}
-                    <li> <a href="http://127.0.0.1:8000/postbox/{{ full_name}}/{{ i.owner_id }}/{{i.id}}/"> {{ i.category }}</a></li>
+                    <li> <a href="/postbox/{{ full_name}}/{{i.id}}/"> {{ i.category }}</a></li>
                 {% empty %}
                         <li>Sorry, you hadn't created any categories</li>
             {% endfor %}
@@ -105,41 +78,6 @@
 
     <div id="posts1">
 
-          {% for j,i in post %}
-            <div class="row">
-
-                <div class="col-lg-16"><div class="well" style=";background:white;">
-                 <p align="left">
-                      {% load staticfiles %}
-                      <img src="{% static "postbox/bird.jpg" %}" class="img-circle" height="55" width="55" alt="Avatar"/>
-                      <b>&nbsp;&nbsp;&nbsp;{{ i.owner }}</b>&nbsp;&nbsp;&nbsp;
-                      <a href="http://127.0.0.1:8000/postbox/{{ full_name}}/{{ i.id }}/edit_post/" data-toggle="tooltip" title="Edit this post"><span style="color: black" class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;
-                      <a data-toggle="tooltip" href="http://127.0.0.1:8000/postbox/{{ full_name}}/{{ i.id }}/delete_post/"  title="Delete"><span class="glyphicon glyphicon-trash" style="color: red"></span></a>
-                      <p align="right">&nbsp; <b>Category: </b>{{ i.cid }}<b>&nbsp;&nbsp;&nbsp;&nbsp;Created on:</b>{{ i.p_date }}</p>
-                 </p>
-                   <hr>
-                  <p align="left" style="font-size:30px;font-family:'Copperplate Gothic Light';color: darkorange">{{ i.title }}</p><hr>
-                  <br>
-                  {% if  i.image %}
-                      {% for l in img %}
-                        {% if  j ==  forloop.counter0 %}
-                           {% load staticfiles %}
-                            <img src="{% static l %}" class="img-square" height="500" width=100% alt="Avatar"/><br><br>
-                        {% endif %}
-                       {% endfor %}
-                  {% endif %}
-                   <p align="left">{{i.status|safe}}</p><br>
-                    <a href="http://127.0.0.1:8000/postbox/{{ full_name }}/{{ i.owner_id }}/{{ i.cid_id }}/{{ i.id }}/comments/">Comments</a>
-
-                </div></div></div>
-               {% empty %}
-                        <p>Sorry, no posts</p>
-          {% endfor %}
-
-     </div>
-
-     <div id="posts2">
-
           {% for j,i in posts %}
             <div class="row">
 
@@ -147,10 +85,10 @@
                  <p align="left">
                       {% load staticfiles %}
                       <img src="{% static "postbox/bird.jpg" %}" class="img-circle" height="55" width="55" alt="Avatar"/>
-                      <b>&nbsp;&nbsp;&nbsp;{{ i.owner }}</b>&nbsp;&nbsp;&nbsp;
-                      <a href="http://127.0.0.1:8000/postbox/{{ full_name}}/{{ i.id }}/edit_post/" data-toggle="tooltip" title="Edit this post"><span style="color: black" class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;
-                      <a data-toggle="tooltip" href="http://127.0.0.1:8000/postbox/{{ full_name}}/{{ i.id }}/delete_post/"  title="Delete"><span class="glyphicon glyphicon-trash" style="color: red"></span></a>
-                      <p align="right">&nbsp; <b>Category: </b>{{ i.cid }}<b>&nbsp;&nbsp;&nbsp;&nbsp;Created on:</b>{{ i.p_date }}</p>
+                      <b style="font-family: 'Copperplate Gothic Light';color: #2b669a">&nbsp;&nbsp;&nbsp;{{ i.owner }}</b>&nbsp;&nbsp;&nbsp;
+                      <a href="/postbox/{{ full_name}}/{{ i.id }}/edit_post/" data-toggle="tooltip" title="Edit this post"><span style="color: black" class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;
+                      <a data-toggle="tooltip" href="/postbox/{{ full_name}}/{{ i.id }}/delete_post/"  title="Delete"><span class="glyphicon glyphicon-trash" style="color: red"></span></a>
+                      <p align="right" style="font-family: 'Copperplate Gothic Light';color: green">&nbsp; <b >Category: </b>{{ i.cid }}<b>&nbsp;&nbsp;&nbsp;&nbsp;Created on:</b>{{ i.p_date }}</p>
                  </p>
                    <hr>
                   <p align="left" style="font-size:30px;font-family:'Copperplate Gothic Light';color: darkorange">{{ i.title }}</p><hr>
@@ -164,7 +102,7 @@
                        {% endfor %}
                   {% endif %}
                    <p align="left">{{i.status|safe}}</p><br>
-                    <a href="http://127.0.0.1:8000/postbox/{{ full_name }}/{{ i.owner_id }}/{{ i.cid_id }}/{{ i.id }}/comments/">Comments</a>
+                    <a href="/postbox/{{ full_name }}/{{ i.cid_id }}/{{ i.id }}/comments/">Comments</a>
 
                 </div></div></div>
                {% empty %}
@@ -173,8 +111,6 @@
 
      </div>
     </div>
-
-
 
 
 </body>

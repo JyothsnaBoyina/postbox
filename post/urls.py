@@ -18,21 +18,15 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+
     url(r'^postbox/',include('postbox.urls')),
     url(r'^tinymce/', include('tinymce.urls')),
-    url(r'^$','postbox.views.login'),
+
+    url(r'^$','postbox.views.base'),
     url(r'^accounts/auth/$', 'postbox.views.auth_view'),
     url(r'^accounts/logout/$', 'postbox.views.logout'),
     url(r'^accounts/invalid/$', 'postbox.views.invalid_login'),
     url(r'^accounts/register/$', 'postbox.views.register_user'),
 
     url(r'^accounts/', include('django.contrib.auth.urls')),
-
-    # url(r'^accounts/login/$', 'postbox.views.login'),
-    # url(r'^accounts/auth/$', 'postbox.views.auth_view'),url(r'^accounts/auth/$', 'postbox.views.auth_view'),
-    # url(r'^accounts/logout/$', 'postbox.views.logout'),
-    # # url(r'^loggedin/$','postbox.views.logged_in'),
-    # url(r'^accounts/invalid/$', 'postbox.views.invalid_login'),
-    # # url(r'^(?P<uid>[A-Za-z]*)/$','postbox.views.home' ),
-
 ]

@@ -2,7 +2,6 @@ from __future__ import unicode_literals
 
 from django.db import models
 from  django.utils import *
-from tinymce.models import HTMLField
 from datetime import datetime
 from django.contrib.auth.models import User
 
@@ -33,7 +32,7 @@ class Posts(models.Model):
     cid=models.ForeignKey(Categories, on_delete=models.CASCADE)
     title=models.CharField(max_length=200,default="")
     status=models.TextField()
-    image=models.ImageField(upload_to = 'C:/Users/Jyothsna Boyina/PycharmProjects/post/postbox/static/postbox/',null=True,default='/postbox/images/1.jpg')
+    image=models.ImageField(upload_to = 'C:/Users/Jyothsna Boyina/PycharmProjects/post/postbox/static/postbox/',null=True,default='')
     p_date = models.DateTimeField(null=False, blank=False,default=datetime.now())
 
     def __unicode__(self):

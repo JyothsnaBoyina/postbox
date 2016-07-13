@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
-import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -41,6 +40,7 @@ INSTALLED_APPS = [
     'postbox',
     'tinymce',
     'rest_framework',
+    'bootstrapform',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -81,9 +81,9 @@ WSGI_APPLICATION = 'post.wsgi.application'
 
 DATABASES = {
     'default': {
-        #
+
         # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        # 'NAME': 'postbox',
+        # 'NAME': 'post',
         # 'USER': 'postgres',
         # 'PASSWORD': 'system2',
         # 'HOST': 'localhost',
@@ -98,7 +98,7 @@ DATABASES = {
         'PASSWORD': 'EmafNF-oUbSlVEjt3vhh5X03-k',
         'HOST': 'ec2-54-235-90-96.compute-1.amazonaws.com',
         'PORT': '5432'
-
+        #
         # 'ENGINE': 'django.db.backends.mysql',
         # 'NAME': 'postbox',
         # 'USER': 'Jyo',
@@ -154,20 +154,6 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 STATIC_ROOT=os.path.join((BASE_DIR),'static')
 STATIC_URL = '/static/'
-
-
-# DATABASES['default'] = dj_database_url.config()
-#
-# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-#
-# ALLOWED_HOSTS = ['*']
-#
-# DEBUG = False
-#
-# try:
-#     from .local_settings import *
-# except ImportError:
-#     pass
 
 
 
