@@ -10,6 +10,7 @@ from postbox.models import *
 from django.http import *
 from django.contrib.auth.forms import UserCreationForm
 from django.template import loader
+import pytz
 
 
 class Newsfeed(ListView):
@@ -214,6 +215,8 @@ class Create_post(ListView):
                         post_form.image = self.request.FILES['image']
                     else:
                         post_form.image = ''
+                    tz= pytz.timezone('Asia/Calcutta')
+                    post_form.p_date=datetime.now(tz)
                     post_form.save()
                     return HttpResponseRedirect('/postbox/' + uname + '/profile/')
                 except Exception as e:
