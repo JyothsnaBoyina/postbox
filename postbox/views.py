@@ -633,17 +633,17 @@ def register_user(request):
 
 def delete_post(request, uname, pid):
     note = get_object_or_404(Posts, id=pid).delete()
-    return HttpResponseRedirect('http://127.0.0.1:8000/postbox/' + uname + '/profile')
+    return HttpResponseRedirect('/postbox/' + uname + '/profile')
 
 def delete_comment(request,uname,cid,pid,cmid):
     note = get_object_or_404(Comments, id=cmid).delete()
-    return HttpResponseRedirect('http://127.0.0.1:8000/postbox/'+uname+'/'+cid+'/'+pid+'/comments/')
+    return HttpResponseRedirect('/postbox/'+uname+'/'+cid+'/'+pid+'/comments/')
 
 def delete_comment1(request,uname,pid,cmid):
     note = get_object_or_404(Comments, id=cmid).delete()
-    return HttpResponseRedirect('http://127.0.0.1:8000/postbox/'+uname+'/'+pid+'/comments/')
+    return HttpResponseRedirect('/postbox/'+uname+'/'+pid+'/comments/')
 
 def delete_cat(request,uname,cid):
     note = get_object_or_404(Categories, id=cid).delete()
-    return HttpResponseRedirect('http://127.0.0.1:8000/postbox/'+uname+'/profile/')
+    return HttpResponseRedirect('/postbox/'+uname+'/profile/')
 
