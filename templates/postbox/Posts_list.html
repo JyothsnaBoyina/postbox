@@ -31,7 +31,7 @@
     body{  position: relative;  }
     #section{padding-top:80px;}
     hr {  display: block;  height: 1px;  border: 0;  border-top: 1px solid black;  margin: 1em 0;  padding: 0;  }
-    #side{  z-index: 1000;  position:fixed;left:0px; top:50px; width: 200px;  height:100%;  background: #000;  overflow-y: auto;  }
+    #side{  z-index: 1000;  position:fixed;left:0; top:50px; width: 200px;  height:100%;  background: #000;  overflow-y: auto;  }
     .sidebar-nav {  position: relative;  top: 0;  width: 200px;  margin: 0;  padding: 0;  list-style: none;  margin-top: 2px;  }
     .sidebar-nav li {  text-indent: 15px;  line-height: 40px;  }
     .sidebar-nav li a {  display: block;  text-decoration: none;  color: #999999;  }
@@ -99,13 +99,16 @@
     <div id="posts1">
 
           {% for i in categories %}{% if i.id == cat %}
-               <p align="left" style="font-size: 20px;font-family:'Castellar';"><b> {{i.category}}</b>&nbsp;&nbsp;&nbsp;
+
+               <p align="left" ><b style="font-size: 25px;font-family:'Copperplate Gothic Light';"> {{i.category}}</b>&nbsp;&nbsp;&nbsp;
                <a href="/postbox/{{ full_name}}/{{ i.id }}/edit_cat/" data-toggle="tooltip" title="Edit this category name"><span style="color: black" class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;
-            <a data-toggle="tooltip" href="/postbox/{{ full_name}}/{{ i.id }}/delete_cat/"  title="Delete this category"><span class="glyphicon glyphicon-trash" style="color: red"></span></a>
+            <a data-toggle="tooltip" href="/postbox/{{ full_name}}/{{ i.id }}/delete_cat/"  title="Delete this category"><span class="glyphicon glyphicon-trash" style="color: red"></span></a>&nbsp;&nbsp;
+                   <a data-toggle="tooltip" href="/postbox/{{ full_name}}/create_post/"  title="Add a post"><span class="glyphicon glyphicon-plus" style="color: green"></span></a>
+
             <br><br></p>
           {% endif %} {% endfor %}
 
-          {% for j,i in post %}
+          {% for i in post %}
             <div class="row">
 
                 <div class="col-sm-16"><div class="well" style=";background:white;">
@@ -121,12 +124,7 @@
                   <p align="left" style="font-size:30px;font-family:'Copperplate Gothic Light';color: darkorange">{{ i.title }}</p><hr>
                   <br>
                   {% if  i.image %}
-                      {% for l in img %}
-                        {% if  j ==  forloop.counter0 %}
-                           {% load staticfiles %}
-                            <img src="{% static l %}" class="img-square" height="500" width=80% alt="Avatar"/><br><br>
-                        {% endif %}
-                       {% endfor %}
+                            <img src="{{ i.image }}" class="img-square" alt="Avatar"/><br><br>
                   {% endif %}
                    <p align="left">{{i.status|safe}}</p><br>
                     <a href="/postbox/{{ full_name }}/{{ i.cid_id }}/{{ i.id }}/comments/">Comments</a>
@@ -141,13 +139,13 @@
       <div id="posts2">
 
           {% for i in categories1 %}{% if i.id == cat %}
-               <p align="left" style="font-size: 20px;font-family:'Castellar';"><b> {{i.category}}</b>&nbsp;&nbsp;&nbsp;
+               <p align="left" ><b style="font-size: 25px;font-family:'Copperplate Gothic Light';"> {{i.category}}</b>&nbsp;&nbsp;&nbsp;
                <a href="/postbox/{{ full_name}}/{{ i.id }}/edit_cat/" data-toggle="tooltip" title="Edit this category name"><span style="color: black" class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;
             <a data-toggle="tooltip" href="/postbox/{{ full_name}}/{{ i.id }}/delete_cat/"  title="Delete this category"><span class="glyphicon glyphicon-trash" style="color: red"></span></a>
             <br><br></p>
           {% endif %} {% endfor %}
 
-          {% for j,i in posts %}
+          {% for i in posts %}
             <div class="row">
 
                 <div class="col-sm-16"><div class="well" style=";background:white;">
@@ -163,12 +161,7 @@
                   <p align="left" style="font-size:30px;font-family:'Copperplate Gothic Light';color: darkorange">{{ i.title }}</p><hr>
                   <br>
                   {% if  i.image %}
-                      {% for l in img %}
-                        {% if  j ==  forloop.counter0 %}
-                           {% load staticfiles %}
-                            <img src="{% static l %}" class="img-square" height="500" width=80% alt="Avatar"/><br><br>
-                        {% endif %}
-                       {% endfor %}
+                            <img src="{{ i.image }}" class="img-square"  alt="Avatar"/><br><br>
                   {% endif %}
                    <p align="left">{{i.status|safe}}</p><br>
                     <a href="/postbox/{{ full_name }}/{{ i.cid_id }}/{{ i.id }}/comments/">Comments</a>

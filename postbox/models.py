@@ -34,7 +34,8 @@ class Posts(models.Model):
     cid=models.ForeignKey(Categories, on_delete=models.CASCADE)
     title=models.CharField(max_length=200,default="")
     status=models.TextField(default='',null=True)
-    image=models.ImageField(upload_to = 'C:/Users/Jyothsna Boyina/PycharmProjects/post/postbox/static/postbox/',null=True,default='')
+    image=models.CharField(max_length=250,null=True,default='')
+    # image=models.ImageField(null=True,default='')
     p_date = models.DateTimeField(null=False, blank=False,default=datetime.now)
 
     def __unicode__(self):

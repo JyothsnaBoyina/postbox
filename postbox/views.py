@@ -8,6 +8,7 @@ from django.views.generic.list import ListView
 from django.views.generic.edit import DeleteView
 from postbox.models import *
 from django.http import *
+from postbox.custom_storages import *
 from django.contrib.auth.forms import UserCreationForm
 from django.template import loader
 import pytz
@@ -20,23 +21,13 @@ class Newsfeed(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(Newsfeed, self).get_context_data(**kwargs)
-        context['posts'] = enumerate(Posts.objects.all())
-        context['post'] = enumerate(Posts.objects.all())
+        context['posts'] = Posts.objects.all().order_by('-p_date')
+        context['post'] = Posts.objects.all().order_by('-p_date')
         uname=self.request._cached_user.username
         u = User.objects.filter(username=uname).values('id')
-        context['categories'] = Categories.objects.filter(owner_id=u)
-        p=u[0].values()
-        context['p']=p[0]
+        context['categories'] = Categories.objects.filter(owner_id=u).order_by('-c_date')
+        context['p']=u[0].values()[0]
         context['full_name'] = uname
-        l = []
-        p1 = Posts.objects.values('image')
-        context['s']=p1[0].values()[0]
-        for i in p1:
-            s = i.values()[0]
-            lst = s.split('/', s.count('/'))
-            string = 'postbox/' + lst[-1]
-            l.append(string)
-        context['img'] = l
         return context
 
 class Profile(ListView):
@@ -48,18 +39,10 @@ class Profile(ListView):
         context = super(Profile, self).get_context_data(**kwargs)
         uname=self.kwargs['uname']
         u = User.objects.filter(username=uname).values('id')
-        context['posts'] = enumerate(Posts.objects.filter(owner_id=u))
-        context['post'] = enumerate(Posts.objects.filter(owner_id=u))
-        context['categories'] = Categories.objects.filter(owner_id=u)
+        context['posts'] = Posts.objects.filter(owner_id=u).order_by('-p_date')
+        context['post'] = Posts.objects.filter(owner_id=u).order_by('-p_date')
+        context['categories'] = Categories.objects.filter(owner_id=u).order_by('-c_date')
         context['full_name']=self.kwargs['uname']
-        l = []
-        p1 = Posts.objects.filter(owner_id=u[0].values()[0]).values('image')
-        for i in p1:
-            s = i.values()[0]
-            lst = s.split('/', s.count('/'))
-            string = 'postbox/' + lst[-1]
-            l.append(string)
-        context['img'] = l
         return context
 
 class PostList(ListView):
@@ -72,22 +55,12 @@ class PostList(ListView):
         uname = self.kwargs['uname']
         cid = self.kwargs.get('cid')
         u = User.objects.filter(username=uname).values('id')
-        context['categories'] = Categories.objects.filter(owner_id=u)
+        context['categories'] = Categories.objects.filter(owner_id=u).order_by('-c_date')
         context['full_name'] = self.kwargs['uname']
         context['cat'] = int(cid)
-        context['post'] = enumerate(Posts.objects.filter(cid_id=self.kwargs['cid']))
-        context['posts'] = enumerate(Posts.objects.filter(cid_id=self.kwargs['cid']))
-        context['categories1'] = Categories.objects.filter(owner_id=u)
-
-        l=[]
-        p=Posts.objects.filter(cid_id=self.kwargs['cid']).values('image')
-        for i in p:
-            s=i.values()[0]
-            lst=s.split('/',s.count('/'))
-            string='postbox/'+lst[-1]
-            l.append(string)
-        context['img']=l
-
+        context['post'] = Posts.objects.filter(cid_id=self.kwargs['cid']).order_by('-p_date')
+        context['posts'] = Posts.objects.filter(cid_id=self.kwargs['cid']).order_by('-p_date')
+        context['categories1'] = Categories.objects.filter(owner_id=u).order_by('-c_date')
         return context
 
 class CreateCat(ListView):
@@ -99,7 +72,7 @@ class CreateCat(ListView):
         context = super(CreateCat, self).get_context_data(**kwargs)
         uname = self.kwargs['uname']
         u = User.objects.filter(username=uname).values('id')
-        categories = Categories.objects.filter(owner_id=u)
+        categories = Categories.objects.filter(owner_id=u).order_by('-c_date')
         context['form']=CategoryForm()
         context['categories']= categories
         context['full_name']=uname
@@ -108,7 +81,7 @@ class CreateCat(ListView):
     def post(self,*args,**kwargs):
         uname=self.kwargs['uname']
         u = User.objects.filter(username=uname).values('id')
-        categories = Categories.objects.filter(owner_id=u)
+        categories = Categories.objects.filter(owner_id=u).order_by('-c_date')
         context = RequestContext(self.request)
 
         if self.request.method == 'POST':
@@ -130,10 +103,6 @@ class CreateCat(ListView):
                 return render_to_response('postbox/Categories_form.html',
                                           {'mesg': mesg, 'form': form, 'full_name': uname, 'categories': categories},
                                           context)
-        # else:
-        #     form = CategoryForm()
-        #     return render_to_response('postbox/Categories_form.html',
-        #                               {'form': form, 'full_name': uname, 'categories': categories}, context)
 
 class edit_cat(ListView):
     model = Categories
@@ -146,7 +115,7 @@ class edit_cat(ListView):
         cid=self.kwargs['cid']
         cat = get_object_or_404(Categories, id=int(cid))
         u = User.objects.filter(username=uname).values('id')
-        categories = Categories.objects.filter(owner_id=u)
+        categories = Categories.objects.filter(owner_id=u).order_by('-c_date')
         context['form'] = CategoryForm(instance=cat)
         context['categories'] = categories
         context['full_name'] = uname
@@ -156,7 +125,7 @@ class edit_cat(ListView):
         uname = self.kwargs['uname']
         cid = self.kwargs['cid']
         u = User.objects.filter(username=uname).values('id')
-        categories = Categories.objects.filter(owner_id=u)
+        categories = Categories.objects.filter(owner_id=u).order_by('-c_date')
         cat = get_object_or_404(Categories, id=int(cid))
 
         context = RequestContext(self.request)
@@ -181,10 +150,6 @@ class edit_cat(ListView):
                 return render_to_response('postbox/Posts_form.html',
                                           {'mesg': mesg, 'form': form, 'full_name': uname, 'categories': categories},
                                           context)
-        else:
-            form = CategoryForm(instance=cat)
-            return render_to_response('postbox/Categories_form.html',
-                                      {'form': form, 'full_name': uname, 'categories': categories}, context)
 
 class Create_post(ListView):
     model = Posts
@@ -196,7 +161,7 @@ class Create_post(ListView):
         uname = self.kwargs['uname']
         u = User.objects.filter(username=uname).values('id')
         p = u[0].values()
-        categories = Categories.objects.filter(owner_id=u)
+        categories = Categories.objects.filter(owner_id=u).order_by('-c_date')
         context['form'] = PostsForm(p[0])
         context['categories'] = categories
         context['full_name'] = self.kwargs['uname']
@@ -205,7 +170,7 @@ class Create_post(ListView):
     def post(self,*args,**kwargs):
         uname = self.kwargs['uname']
         u = User.objects.filter(username=uname).values('id')
-        categories = Categories.objects.filter(owner_id=u)
+        categories = Categories.objects.filter(owner_id=u).order_by('-c_date')
         context = RequestContext(self.request)
 
         if self.request.method == 'POST':
@@ -216,7 +181,11 @@ class Create_post(ListView):
                     post_form = form.save(commit=False)
                     post_form.owner_id = p[0]
                     if len(self.request.FILES) != 0:
-                        post_form.image = self.request.FILES['image']
+                        file = self.request.FILES["image"]
+                        filename = file.name
+                        content = file.read()
+                        store_in_s3(filename, content)
+                        post_form.image = "https://s3-us-west-2.amazonaws.com/thoughtspost/"+filename
                     else:
                         post_form.image = ''
                     post_form.save()
@@ -232,12 +201,6 @@ class Create_post(ListView):
                                           {'mesg': mesg, 'form': form, 'full_name': uname, 'categories': categories},
                                           context)
 
-        else:
-            p = u[0].values()
-            form = PostsForm(p[0])
-            return render_to_response('postbox/Posts_form.html',
-                                      {'form': form, 'full_name': uname, 'categories': categories}, context)
-
 class Edit_post(ListView):
     model = Posts
     template_name = 'postbox/Posts_form.html'
@@ -250,7 +213,7 @@ class Edit_post(ListView):
         post = get_object_or_404(Posts, id=int(pid))
         u = User.objects.filter(username=uname).values('id')
         p = u[0].values()
-        categories = Categories.objects.filter(owner_id=u)
+        categories = Categories.objects.filter(owner_id=u).order_by('-c_date')
         context['form'] = PostsForm(p[0],instance=post)
         context['categories'] = categories
         context['full_name'] = uname
@@ -260,7 +223,7 @@ class Edit_post(ListView):
         uname = self.kwargs['uname']
         pid = self.kwargs['pid']
         u = User.objects.filter(username=uname).values('id')
-        categories = Categories.objects.filter(owner_id=u)
+        categories = Categories.objects.filter(owner_id=u).order_by('-c_date')
         context = RequestContext(self.request)
         post = get_object_or_404(Posts, id=pid)
 
@@ -272,7 +235,11 @@ class Edit_post(ListView):
                     post_form = form.save(commit=False)
                     post_form.owner_id = p[0]
                     if len(self.request.FILES) != 0:
-                        post_form.image = self.request.FILES['image']
+                        file = self.request.FILES['image']
+                        filename = file.name
+                        content = file.read()
+                        store_in_s3(filename, content)
+                        post_form.image = "https://s3-us-west-2.amazonaws.com/thoughtspost/" + filename
                     post_form.save()
                     return HttpResponseRedirect('/postbox/' + uname + '/profile/')
                 except Exception as e:
@@ -286,12 +253,6 @@ class Edit_post(ListView):
                                           {'mesg': mesg, 'form': form, 'full_name': uname, 'categories': categories},
                                           context)
 
-        else:
-            p = u[0].values()
-            form = PostsForm(p[0], instance=post)
-            return render_to_response('postbox/Posts_form.html',
-                                      {'form': form, 'full_name': uname, 'categories': categories}, context)
-
 class CommentList(ListView):
     model = Comments
     context_object_name = 'comment_list'
@@ -302,21 +263,11 @@ class CommentList(ListView):
         uname = self.kwargs['uname']
         cid = self.kwargs['cid']
         u = User.objects.filter(username=uname).values('id')
-        context['categories'] = Categories.objects.filter(owner_id=u)
+        context['categories'] = Categories.objects.filter(owner_id=u).order_by('-c_date')
         context['full_name'] = self.kwargs['uname']
         context['cat'] = int(cid)
-        # context['cat_id'] = str(cat)
-        if(cid):
-         context['post'] = enumerate(Posts.objects.filter(id=self.kwargs['pid']))
-        l=[]
-        p=Posts.objects.filter(id=self.kwargs['pid']).values('image')
-        for i in p:
-            s=i.values()[0]
-            lst=s.split('/',s.count('/'))
-            string='postbox/'+lst[-1]
-            l.append(string)
-        context['img']=l
-        context['c']=Comments.objects.filter(pid=self.kwargs['pid'])
+        context['post'] =Posts.objects.filter(id=self.kwargs['pid']).order_by('-p_date')
+        context['c']=Comments.objects.filter(pid=self.kwargs['pid']).order_by('cm_date')
         context['uid']=u[0].values()[0]
         context['pid'] = int(self.kwargs.get('pid'))
         form = CommentForm()
@@ -328,19 +279,12 @@ class CommentList(ListView):
       pid=int(kwargs.get('pid'))
       cat=int(kwargs.get('cid'))
 
-      post=enumerate(Posts.objects.filter(id=kwargs['pid']))
-      c=Comments.objects.filter(pid=kwargs['pid'])
-      l = []
-      p = Posts.objects.filter(id=kwargs['pid']).values('image')
-      for i in p:
-          s = i.values()[0]
-          lst = s.split('/', s.count('/'))
-          string = 'postbox/' + lst[-1]
-          l.append(string)
+      post=Posts.objects.filter(id=kwargs['pid']).order_by('-p_date')
+      c=Comments.objects.filter(pid=kwargs['pid']).order_by('cm_date')
 
       u = User.objects.filter(username=uname).values('id')
       uid=u[0].values()[0]
-      categories = Categories.objects.filter(owner_id=u)
+      categories = Categories.objects.filter(owner_id=u).order_by('-c_date')
       context = RequestContext(self.request)
 
       if self.request.method == 'POST':
@@ -356,10 +300,10 @@ class CommentList(ListView):
                      mesg = 'save_invalid'
                      return render_to_response('postbox/Comments_list.html',
                                       {'mesg': mesg, 'form': form, 'full_name': uname, 'categories': categories,
-                                       'pid': pid, 'uid': uid, 'cat': cat, 'post': post, 'c': c, 'img': l,}, context)
+                                       'pid': pid, 'uid': uid, 'cat': cat, 'post': post, 'c': c}, context)
             else:
                 mesg = 'form_invalid'
-                return render_to_response('postbox/Comments_list.html', {'mesg': mesg, 'form': form, 'full_name': uname,'categories':categories,'pid':pid,'uid':uid,'cat':cat,'post':post,'c':c,'img':l},context)
+                return render_to_response('postbox/Comments_list.html', {'mesg': mesg, 'form': form, 'full_name': uname,'categories':categories,'pid':pid,'uid':uid,'cat':cat,'post':post,'c':c},context)
 
 class CommentList1(ListView):
     model = Comments
@@ -371,17 +315,9 @@ class CommentList1(ListView):
         uname = self.kwargs['uname']
         u = User.objects.filter(username=uname).values('id')
         context['full_name'] = self.kwargs['uname']
-        context['categories'] = Categories.objects.filter(owner_id=u)
-        context['post'] = enumerate(Posts.objects.filter(id=self.kwargs['pid']))
-        l=[]
-        p=Posts.objects.filter(id=self.kwargs['pid']).values('image')
-        for i in p:
-            s=i.values()[0]
-            lst=s.split('/',s.count('/'))
-            string='postbox/'+lst[-1]
-            l.append(string)
-        context['img']=l
-        context['c']=Comments.objects.filter(pid=self.kwargs['pid'])
+        context['categories'] = Categories.objects.filter(owner_id=u).order_by('-c_date')
+        context['post'] =Posts.objects.filter(id=self.kwargs['pid']).order_by('-p_date')
+        context['c']=Comments.objects.filter(pid=self.kwargs['pid']).order_by('cm_date')
         context['uid']=u[0].values()[0]
         context['pid'] = int(self.kwargs.get('pid'))
         form = CommentForm()
@@ -392,19 +328,12 @@ class CommentList1(ListView):
       uname = kwargs.get('uname')
       pid=int(kwargs.get('pid'))
 
-      post=enumerate(Posts.objects.filter(id=kwargs['pid']))
-      c=Comments.objects.filter(pid=kwargs['pid'])
-      l = []
-      p = Posts.objects.filter(id=kwargs['pid']).values('image')
-      for i in p:
-          s = i.values()[0]
-          lst = s.split('/', s.count('/'))
-          string = 'postbox/' + lst[-1]
-          l.append(string)
+      post=Posts.objects.filter(id=kwargs['pid']).order_by('-p_date')
+      c=Comments.objects.filter(pid=kwargs['pid']).order_by('-c_date')
 
       u = User.objects.filter(username=uname).values('id')
       uid=u[0].values()[0]
-      categories = Categories.objects.filter(owner_id=uid)
+      categories = Categories.objects.filter(owner_id=uid).order_by('cm_date')
       context = RequestContext(self.request)
 
       if self.request.method == 'POST':
@@ -420,10 +349,10 @@ class CommentList1(ListView):
                      mesg = 'save_invalid'
                      return render_to_response('postbox/Comments_list1.html',
                                       {'mesg': mesg, 'form': form, 'full_name': uname,
-                                       'pid': pid, 'uid': uid, 'post': post, 'c': c, 'img': l,'categories':categories}, context)
+                                       'pid': pid, 'uid': uid, 'post': post, 'c': c,'categories':categories}, context)
             else:
                 mesg = 'form_invalid'
-                return render_to_response('postbox/Comments_list1.html', {'mesg': mesg, 'form': form,'categories':categories, 'full_name': uname,'pid':pid,'uid':uid,'post':post,'c':c,'img':l},context)
+                return render_to_response('postbox/Comments_list1.html', {'mesg': mesg, 'form': form,'categories':categories, 'full_name': uname,'pid':pid,'uid':uid,'post':post,'c':c},context)
 
 class EditComment(ListView):
     model = Comments
@@ -437,19 +366,11 @@ class EditComment(ListView):
         cat = int(self.kwargs['cid'])
         cmid = int(self.kwargs['cmid'])
         comment = get_object_or_404(Comments, id=cmid)
-        post = enumerate(Posts.objects.filter(id=pid))
-        c = Comments.objects.filter(pid=pid)
-        l = []
-        p = Posts.objects.filter(id=pid).values('image')
-        for i in p:
-            s = i.values()[0]
-            lst = s.split('/', s.count('/'))
-            string = 'postbox/' + lst[-1]
-            l.append(string)
-
+        post = Posts.objects.filter(id=pid).order_by('-p_date')
+        c = Comments.objects.filter(pid=pid).order_by('cm_date')
         u = User.objects.filter(username=uname).values('id')
         uid=u[0].values()[0]
-        categories = Categories.objects.filter(owner_id=u)
+        categories = Categories.objects.filter(owner_id=u).order_by('-c_date')
         context['form'] = CommentForm(instance=comment)
         context['full_name']=uname
         context['categories']=categories
@@ -457,7 +378,6 @@ class EditComment(ListView):
         context['pid']=pid
         context['cat']=cat
         context['post']=post
-        context['img']=l
         context['c']=c
         context['cmid']=cmid
         return context
@@ -468,19 +388,11 @@ class EditComment(ListView):
         cat = int(self.kwargs['cid'])
         cmid = int(self.kwargs['cmid'])
         comment = get_object_or_404(Comments, id=cmid)
-        post = enumerate(Posts.objects.filter(id=pid))
-        c = Comments.objects.filter(pid=pid)
-        l = []
-        p = Posts.objects.filter(id=pid).values('image')
-        for i in p:
-            s = i.values()[0]
-            lst = s.split('/', s.count('/'))
-            string = 'postbox/' + lst[-1]
-            l.append(string)
-
+        post = Posts.objects.filter(id=pid).order_by('-p_date')
+        c = Comments.objects.filter(pid=pid).order_by('cm_date')
         u = User.objects.filter(username=uname).values('id')
         uid=u[0].values()[0]
-        categories = Categories.objects.filter(owner_id=u)
+        categories = Categories.objects.filter(owner_id=u).order_by('-c_date')
         context = RequestContext(self.request)
 
         if self.request.method == 'POST':
@@ -497,13 +409,13 @@ class EditComment(ListView):
                     mesg = 'save_invalid'
                     return render_to_response('postbox/Comments_list.html',
                                               {'mesg': mesg, 'form': form, 'full_name': uname, 'categories': categories,
-                                               'pid': pid, 'uid': uid, 'cat': cat, 'post': post, 'c': c, 'img': l,
+                                               'pid': pid, 'uid': uid, 'cat': cat, 'post': post, 'c': c,
                                                'cmid': cmid}, context)
             else:
                 mesg = 'form_invalid'
                 return render_to_response('postbox/Comments_list.html',
                                           {'mesg': mesg, 'form': form, 'full_name': uname, 'categories': categories,
-                                           'pid': pid, 'uid': uid, 'cat': cat, 'post': post, 'c': c, 'img': l,
+                                           'pid': pid, 'uid': uid, 'cat': cat, 'post': post, 'c': c,
                                            'cmid': cmid}, context)
 
 class EditComment1(ListView):
@@ -517,16 +429,8 @@ class EditComment1(ListView):
         pid = int(self.kwargs['pid'])
         cmid = int(self.kwargs['cmid'])
         comment = get_object_or_404(Comments, id=cmid)
-        post = enumerate(Posts.objects.filter(id=pid))
-        c = Comments.objects.filter(pid=pid)
-        l = []
-        p = Posts.objects.filter(id=pid).values('image')
-        for i in p:
-            s = i.values()[0]
-            lst = s.split('/', s.count('/'))
-            string = 'postbox/' + lst[-1]
-            l.append(string)
-
+        post =Posts.objects.filter(id=pid).order_by('-p_date')
+        c = Comments.objects.filter(pid=pid).order_by('cm_date')
         u = User.objects.filter(username=uname).values('id')
         uid=u[0].values()[0]
         context['form'] = CommentForm(instance=comment)
@@ -534,9 +438,8 @@ class EditComment1(ListView):
         context['uid'] = uid
         context['pid'] = pid
         context['post'] = post
-        context['img'] = l
         context['c'] = c
-        context['categories'] = Categories.objects.filter(owner_id=u)
+        context['categories'] = Categories.objects.filter(owner_id=u).order_by('-c_date')
         context['cmid'] = cmid
         return context
 
@@ -547,17 +450,9 @@ class EditComment1(ListView):
         comment = get_object_or_404(Comments, id=cmid)
         u = User.objects.filter(username=uname).values('id')
         uid = u[0].values()[0]
-        post = enumerate(Posts.objects.filter(id=pid))
-        categories= Categories.objects.filter(owner_id=u)
-        c = Comments.objects.filter(pid=pid)
-        l = []
-        p = Posts.objects.filter(id=pid).values('image')
-        for i in p:
-            s = i.values()[0]
-            lst = s.split('/', s.count('/'))
-            string = 'postbox/' + lst[-1]
-            l.append(string)
-
+        post = Posts.objects.filter(id=pid).order_by('-p_date')
+        categories= Categories.objects.filter(owner_id=u).order_by('-c_date')
+        c = Comments.objects.filter(pid=pid).order_by('cm_date')
         context = RequestContext(self.request)
 
         if self.request.method == 'POST':
@@ -574,13 +469,13 @@ class EditComment1(ListView):
                     mesg = 'save_invalid'
                     return render_to_response('postbox/Comments_list1.html',
                                               {'mesg': mesg, 'form': form, 'full_name': uname,
-                                               'pid': pid, 'uid': uid, 'post': post, 'c': c, 'img': l,
+                                               'pid': pid, 'uid': uid, 'post': post, 'c': c,
                                                'cmid': cmid, 'categories':categories}, context)
             else:
                 mesg = 'form_invalid'
                 return render_to_response('postbox/Comments_list1.html',
                                           {'mesg': mesg, 'form': form, 'full_name': uname,
-                                           'pid': pid, 'uid': uid, 'post': post, 'c': c, 'img': l, 'cmid':cmid,'categories':categories},
+                                           'pid': pid, 'uid': uid, 'post': post, 'c': c, 'cmid':cmid,'categories':categories},
                                           context)
 
 def login(request):

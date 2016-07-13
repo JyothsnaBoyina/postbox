@@ -98,7 +98,9 @@
 
     <div id="posts1">
 
-          {% for j,i in posts %}
+          <h4 style="font-family:'Copperplate Gothic Light';color:black;font-size:30px">Your Timeline</h4> <br>
+
+          {% for i in posts %}
             <div class="row">
 
                 <div class="col-lg-16"><div class="well" style=";background:white;">
@@ -114,12 +116,7 @@
                   <p align="left" style="font-size:30px;font-family:'Copperplate Gothic Light';color: darkorange">{{ i.title }}</p><hr>
                   <br>
                   {% if  i.image %}
-                      {% for l in img %}
-                        {% if  j ==  forloop.counter0 %}
-                           {% load staticfiles %}
-                            <img src="{% static l %}" class="img-square" height="500" width=80% alt="Avatar"/><br><br>
-                        {% endif %}
-                       {% endfor %}
+                            <img src="{{ i.image }}" class="img-square"  alt="Avatar"/><br><br>
                   {% endif %}
                    <p align="left">{{i.status|safe}}</p><br>
                     <a href="/postbox/{{ full_name }}/{{ i.cid_id }}/{{ i.id }}/comments/">Comments</a>
@@ -132,8 +129,9 @@
      </div>
 
       <div id="posts2">
+<h4 style="font-family:'Copperplate Gothic Light';color:black;font-size:30px">Your Timeline</h4> <br>
 
-          {% for j,i in post %}
+          {% for i in post %}
             <div class="row">
 
                 <div class="col-lg-16"><div class="well" style=";background:white;">
@@ -149,12 +147,7 @@
                   <p align="left" style="font-size:30px;font-family:'Copperplate Gothic Light';color: darkorange">{{ i.title }}</p><hr>
                   <br>
                   {% if  i.image %}
-                      {% for l in img %}
-                        {% if  j ==  forloop.counter0 %}
-                           {% load staticfiles %}
-                            <img src="{% static l %}" class="img-square" height="500" width=80% alt="Avatar"/><br><br>
-                        {% endif %}
-                       {% endfor %}
+                            <img src="{{ i.image }}" class="img-square" alt="Avatar"/><br><br>
                   {% endif %}
                    <p align="left">{{i.status|safe}}</p><br>
                     <a href="/postbox/{{ full_name }}/{{ i.cid_id }}/{{ i.id }}/comments/">Comments</a>
