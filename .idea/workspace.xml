@@ -28,12 +28,45 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/post/settings.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="287">
               <caret line="102" column="22" selection-start-line="97" selection-start-column="7" selection-end-line="102" selection-end-column="22" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/postbox/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="286">
+              <caret line="504" column="42" selection-start-line="504" selection-start-column="42" selection-end-line="504" selection-end-column="42" />
+              <folding>
+                <element signature="e#0#48#0" expanded="true" />
+                <element signature="e#571#1200#0" expanded="false" />
+                <element signature="e#1231#1842#0" expanded="false" />
+                <element signature="e#1874#2694#0" expanded="false" />
+                <element signature="e#2022#2694#0" expanded="false" />
+                <element signature="e#2727#4554#0" expanded="false" />
+                <element signature="e#4586#6671#0" expanded="false" />
+                <element signature="e#6706#9014#0" expanded="false" />
+                <element signature="e#9047#11469#0" expanded="false" />
+                <element signature="e#11504#13966#0" expanded="false" />
+                <element signature="e#14002#16325#0" expanded="false" />
+                <element signature="e#16360#19355#0" expanded="false" />
+                <element signature="e#19391#22223#0" expanded="false" />
+                <element signature="e#22249#22341#0" expanded="false" />
+                <element signature="e#22371#22697#0" expanded="false" />
+                <element signature="e#22732#22786#0" expanded="false" />
+                <element signature="e#22811#22851#0" expanded="false" />
+                <element signature="e#22977#23802#0" expanded="false" />
+                <element signature="e#23846#23960#0" expanded="false" />
+                <element signature="e#24014#24146#0" expanded="false" />
+                <element signature="e#24197#24321#0" expanded="false" />
+                <element signature="e#24362#24478#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -98,10 +131,10 @@
         <option value="$PROJECT_DIR$/templates/postbox/Comments_list1.html" />
         <option value="$PROJECT_DIR$/templates/postbox/newsfeed.html" />
         <option value="$PROJECT_DIR$/templates/postbox/user.html" />
-        <option value="$PROJECT_DIR$/postbox/views.py" />
         <option value="$PROJECT_DIR$/templates/postbox/Posts_list.html" />
         <option value="$PROJECT_DIR$/requirements.txt" />
         <option value="$PROJECT_DIR$/post/settings.py" />
+        <option value="$PROJECT_DIR$/postbox/views.py" />
       </list>
     </option>
   </component>
@@ -170,7 +203,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="post" />
+              <option name="myItemId" value="postbox" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -511,14 +544,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27299702" sideWeight="0.5783309" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29525223" sideWeight="0.48243046" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32937685" sideWeight="0.49707174" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="manage.py@post" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1810089" sideWeight="0.4216691" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="manage.py@post" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1810089" sideWeight="0.4216691" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20717423" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -946,10 +979,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/post/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="287">
+          <caret line="102" column="22" selection-start-line="97" selection-start-column="7" selection-end-line="102" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/postbox/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="47" column="25" selection-start-line="47" selection-start-column="25" selection-end-line="47" selection-end-column="25" />
+        <state relative-caret-position="286">
+          <caret line="504" column="42" selection-start-line="504" selection-start-column="42" selection-end-line="504" selection-end-column="42" />
           <folding>
             <element signature="e#0#48#0" expanded="true" />
             <element signature="e#571#1200#0" expanded="false" />
@@ -957,7 +998,9 @@
             <element signature="e#1874#2694#0" expanded="false" />
             <element signature="e#2022#2694#0" expanded="false" />
             <element signature="e#2727#4554#0" expanded="false" />
+            <element signature="e#4586#6671#0" expanded="false" />
             <element signature="e#6706#9014#0" expanded="false" />
+            <element signature="e#9047#11469#0" expanded="false" />
             <element signature="e#11504#13966#0" expanded="false" />
             <element signature="e#14002#16325#0" expanded="false" />
             <element signature="e#16360#19355#0" expanded="false" />
@@ -966,23 +1009,12 @@
             <element signature="e#22371#22697#0" expanded="false" />
             <element signature="e#22732#22786#0" expanded="false" />
             <element signature="e#22811#22851#0" expanded="false" />
-            <element signature="e#22878#22950#0" expanded="false" />
-            <element signature="e#22984#23809#0" expanded="false" />
-            <element signature="e#23853#23967#0" expanded="false" />
-            <element signature="e#24021#24153#0" expanded="false" />
-            <element signature="e#24204#24328#0" expanded="false" />
-            <element signature="e#24369#24485#0" expanded="false" />
-            <marker date="1468440364402" expanded="false" signature="4581:6671" placeholder="..." />
-            <marker date="1468440364402" expanded="false" signature="9042:11469" placeholder="..." />
+            <element signature="e#22977#23802#0" expanded="false" />
+            <element signature="e#23846#23960#0" expanded="false" />
+            <element signature="e#24014#24146#0" expanded="false" />
+            <element signature="e#24197#24321#0" expanded="false" />
+            <element signature="e#24362#24478#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/post/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="102" column="22" selection-start-line="97" selection-start-column="7" selection-end-line="102" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>

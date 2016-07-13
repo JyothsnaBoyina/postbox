@@ -502,7 +502,7 @@ def base(request):
 
 def logout(request):
     auth.logout(request)
-    return HttpResponseRedirect('/accounts/login/')
+    return HttpResponseRedirect('/postbox/')
 
 def register_user(request):
     context=RequestContext(request)
