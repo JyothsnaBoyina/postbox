@@ -117,7 +117,7 @@
                   {% if  i.image %}
                       {% for l in img %}
                         {% if  j ==  forloop.counter0 %}
-                           {% load staticfiles %}
+                           {% load staticfiles %} {{ l }}{{ s }}
                             <img src="{% static l %}" class="img-square" height="500" width=80% alt="Avatar"/><br><br>
                         {% endif %}
                        {% endfor %}

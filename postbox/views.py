@@ -30,6 +30,7 @@ class Newsfeed(ListView):
         context['full_name'] = uname
         l = []
         p1 = Posts.objects.values('image')
+        context['s']=p1[0].values()[0]
         for i in p1:
             s = i.values()[0]
             lst = s.split('/', s.count('/'))
