@@ -142,6 +142,8 @@
                <p align="left" ><b style="font-size: 25px;font-family:'Copperplate Gothic Light';"> {{i.category}}</b>&nbsp;&nbsp;&nbsp;
                <a href="/postbox/{{ full_name}}/{{ i.id }}/edit_cat/" data-toggle="tooltip" title="Edit this category name"><span style="color: black" class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;
             <a data-toggle="tooltip" href="/postbox/{{ full_name}}/{{ i.id }}/delete_cat/"  title="Delete this category"><span class="glyphicon glyphicon-trash" style="color: red"></span></a>
+                    <a data-toggle="tooltip" href="/postbox/{{ full_name}}/create_post/"  title="Add a post"><span class="glyphicon glyphicon-plus" style="color: green"></span></a>
+
             <br><br></p>
           {% endif %} {% endfor %}
 
