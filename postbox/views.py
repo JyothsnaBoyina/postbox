@@ -602,7 +602,7 @@ def invalid_login(request):
      return render_to_response('registration/invalid.html')
 
 def base(request):
-    return HttpResponseRedirect('/accounts/login/')
+    return HttpResponseRedirect('/postbox/')
 
 def logout(request):
     auth.logout(request)
