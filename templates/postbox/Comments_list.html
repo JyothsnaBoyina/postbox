@@ -37,7 +37,8 @@
     .sidebar-nav>li>a:focus {  color:white;  background-color:orange;  }
     .sidebar-nav li a:active {  color:white;  background-color:orange;  }
     .sidebar-nav > .active { color:white;  background:darkorange; }
-    footer {  background-color: #555;  color: white;  padding: 15px;  }
+      #imge{overflow-y:hidden;max-height:500px;max-width:100%}
+
 
   </style>
 
@@ -113,7 +114,7 @@
                   <p align="left" style="font-size: 30px;font-family: 'Copperplate Gothic Light';color: darkorange">{{ i.title }}</p><hr>
 
                   {% if  i.image %}
-                            <img src="{{ i.image }}" class="img-square"  width="100%" alt="Avatar"/><br><br>
+                            <img src="{{ i.image }}" class="img-square" id="imge" alt="Avatar"/><br><br>
                   {% endif %}
                     <p align="left">{{i.status|safe}}</p><br>
                 </div>
@@ -139,7 +140,7 @@
                           <p class="error">{{ mesg }}</p>
                         {% endif %}
 
-                         <form align='left' id="comment_form" method="post" action="">
+                         <form id="comment_form" method="post" action="">
                           {% csrf_token %}
                              {% load bootstrap %}
                           {{ form|bootstrap }}

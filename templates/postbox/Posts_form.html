@@ -107,6 +107,7 @@
      <form  id="category_form" method="post" action="" enctype="multipart/form-data">
 
             {% csrf_token %}
+            <p align="center"> If your category list is empty, <a href="/postbox/{{ full_name}}/create_category/">click here</a> to add a category</p>
             <p align="left">{{ form.cid.errors}}{{ form.cid|bootstrap}}</p>
             <p align="left">{{ form.title.errors}}{{ form.title|bootstrap }}</p>
             <p align="left">{{ form.status.errors}}{{ form.status|bootstrap}}</p>
@@ -129,6 +130,7 @@
      <form  id="category_form" method="post" action="" enctype="multipart/form-data">
 
             {% csrf_token %}
+            <p align="center"> If your category list is empty, <a href="/postbox/{{ full_name}}/create_category/">click here</a> to add a category</p>
             <p align="left">{{ form.cid.errors}}{{ form.cid|bootstrap}}</p>
             <p align="left">{{ form.title.errors}}{{ form.title|bootstrap }}</p>
             <p align="left">{{ form.status.errors}}{{ form.status|bootstrap}}</p>

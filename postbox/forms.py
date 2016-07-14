@@ -12,7 +12,7 @@ class CategoryForm(ModelForm):
 class PostsForm(ModelForm):
     def __init__(self, uname, *args, **kwargs):
         super(PostsForm, self).__init__(*args, **kwargs)
-        self.fields['cid'] = forms.ModelChoiceField( queryset=Categories.objects.filter(owner=uname),help_text='category')
+        self.fields['cid'] = forms.ModelChoiceField( label='category',queryset=Categories.objects.filter(owner=uname))
         self.fields['image']=forms.ImageField(required=False)
     class Meta:
         model = Posts

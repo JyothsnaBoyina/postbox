@@ -2,7 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="092c9158-9ab7-48e7-8fc5-e0f80ddaa380" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/postbox/forms.py" afterPath="$PROJECT_DIR$/postbox/forms.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/postbox/urls.py" afterPath="$PROJECT_DIR$/postbox/urls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/postbox/views.py" afterPath="$PROJECT_DIR$/postbox/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/postbox/Categories_form.html" afterPath="$PROJECT_DIR$/templates/postbox/Categories_form.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/postbox/Comments_list.html" afterPath="$PROJECT_DIR$/templates/postbox/Comments_list.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/postbox/Comments_list1.html" afterPath="$PROJECT_DIR$/templates/postbox/Comments_list1.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/postbox/Posts_form.html" afterPath="$PROJECT_DIR$/templates/postbox/Posts_form.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/postbox/Posts_list.html" afterPath="$PROJECT_DIR$/templates/postbox/Posts_list.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/postbox/newsfeed.html" afterPath="$PROJECT_DIR$/templates/postbox/newsfeed.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/postbox/user.html" afterPath="$PROJECT_DIR$/templates/postbox/user.html" />
     </list>
     <ignored path="post.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -30,123 +40,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="custom_storages.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/postbox/custom_storages.py">
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/post/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="14" column="29" selection-start-line="14" selection-start-column="29" selection-end-line="14" selection-end-column="29" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/postbox/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="34" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="34" />
-              <folding>
-                <element signature="e#571#1200#0" expanded="false" />
-                <element signature="e#1231#1842#0" expanded="false" />
-                <element signature="e#1874#2694#0" expanded="false" />
-                <element signature="e#2022#2694#0" expanded="false" />
-                <element signature="e#2727#4554#0" expanded="false" />
-                <element signature="e#4586#6671#0" expanded="false" />
-                <element signature="e#9047#11469#0" expanded="false" />
-                <element signature="e#11504#13966#0" expanded="false" />
-                <element signature="e#14002#16325#0" expanded="false" />
-                <element signature="e#16360#19355#0" expanded="false" />
-                <element signature="e#19391#22223#0" expanded="false" />
-                <element signature="e#22249#22341#0" expanded="false" />
-                <element signature="e#22371#22697#0" expanded="false" />
-                <element signature="e#22732#22786#0" expanded="false" />
-                <element signature="e#22811#22851#0" expanded="false" />
-                <element signature="e#22878#22943#0" expanded="false" />
-                <element signature="e#22977#23802#0" expanded="false" />
-                <element signature="e#23846#23960#0" expanded="false" />
-                <element signature="e#24014#24146#0" expanded="false" />
-                <element signature="e#24197#24321#0" expanded="false" />
-                <element signature="e#24362#24478#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/postbox/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="22" column="41" selection-start-line="22" selection-start-column="41" selection-end-line="22" selection-end-column="41" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Comments_list.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/postbox/Comments_list.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="293">
-              <caret line="115" column="82" selection-start-line="115" selection-start-column="82" selection-end-line="115" selection-end-column="82" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="newsfeed.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/postbox/newsfeed.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="122" column="81" selection-start-line="122" selection-start-column="81" selection-end-line="122" selection-end-column="81" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Categories_form.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/postbox/Categories_form.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="257">
-              <caret line="21" column="25" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="user.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/postbox/user.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="355">
-              <caret line="149" column="82" selection-start-line="149" selection-start-column="82" selection-end-line="149" selection-end-column="82" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Posts_form.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/postbox/Posts_form.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="906">
-              <caret line="117" column="9" selection-start-line="117" selection-start-column="9" selection-end-line="117" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Comments_list1.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/postbox/Comments_list1.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="229">
-              <caret line="112" column="81" selection-start-line="112" selection-start-column="81" selection-end-line="112" selection-end-column="81" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Posts_list.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/postbox/Posts_list.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="151">
-              <caret line="126" column="62" selection-start-line="126" selection-start-column="62" selection-end-line="126" selection-end-column="62" />
+            <state relative-caret-position="49">
+              <caret line="90" column="32" selection-start-line="90" selection-start-column="32" selection-end-line="90" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -204,21 +102,21 @@
         <option value="$PROJECT_DIR$/templates/registration/login.html" />
         <option value="$PROJECT_DIR$/templates/registration/register.html" />
         <option value="$PROJECT_DIR$/postbox/tz.py" />
-        <option value="$PROJECT_DIR$/templates/postbox/Posts_form.html" />
         <option value="$PROJECT_DIR$/postbox/models.py" />
         <option value="$PROJECT_DIR$/postbox/d.py" />
-        <option value="$PROJECT_DIR$/postbox/forms.py" />
         <option value="$PROJECT_DIR$/postbox/custom_storages.py" />
         <option value="$PROJECT_DIR$/requirements.txt" />
-        <option value="$PROJECT_DIR$/post/settings.py" />
-        <option value="$PROJECT_DIR$/postbox/views.py" />
-        <option value="$PROJECT_DIR$/postbox/urls.py" />
-        <option value="$PROJECT_DIR$/templates/postbox/Categories_form.html" />
-        <option value="$PROJECT_DIR$/templates/postbox/Comments_list1.html" />
-        <option value="$PROJECT_DIR$/templates/postbox/Comments_list.html" />
-        <option value="$PROJECT_DIR$/templates/postbox/user.html" />
+        <option value="$PROJECT_DIR$/postbox/forms.py" />
+        <option value="$PROJECT_DIR$/templates/postbox/Posts_form.html" />
         <option value="$PROJECT_DIR$/templates/postbox/Posts_list.html" />
+        <option value="$PROJECT_DIR$/templates/postbox/user.html" />
         <option value="$PROJECT_DIR$/templates/postbox/newsfeed.html" />
+        <option value="$PROJECT_DIR$/templates/postbox/Comments_list1.html" />
+        <option value="$PROJECT_DIR$/templates/postbox/Categories_form.html" />
+        <option value="$PROJECT_DIR$/templates/postbox/Comments_list.html" />
+        <option value="$PROJECT_DIR$/postbox/urls.py" />
+        <option value="$PROJECT_DIR$/postbox/views.py" />
+        <option value="$PROJECT_DIR$/post/settings.py" />
       </list>
     </option>
   </component>
@@ -229,10 +127,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="50" />
-    <option name="y" value="7" />
-    <option name="width" value="1317" />
-    <option name="height" value="707" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1382" />
+    <option name="height" value="784" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -301,11 +199,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="postbox" />
+              <option name="myItemId" value="post" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -322,19 +216,19 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Jyothsna Boyina\PycharmProjects\post\postbox\images" />
-      <recent name="C:\Users\Jyothsna Boyina\PycharmProjects\post\postbox\static\js" />
-      <recent name="C:\Users\Jyothsna Boyina\PycharmProjects\post\postbox\static" />
-      <recent name="C:\Users\Jyothsna Boyina\PycharmProjects\post\templates\postbox" />
-      <recent name="C:\Users\Jyothsna Boyina\PycharmProjects\post\templates\postbox\js" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Jyothsna Boyina\PycharmProjects\post\templates\postbox\js" />
       <recent name="C:\Users\Jyothsna Boyina\PycharmProjects\post\templates\postbox\css" />
       <recent name="C:\Users\Jyothsna Boyina\PycharmProjects\post\templates\registration" />
       <recent name="C:\Users\Jyothsna Boyina\PycharmProjects\post" />
       <recent name="C:\Users\Jyothsna Boyina\PycharmProjects\post\postbox\static\postbox" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Jyothsna Boyina\PycharmProjects\post\postbox\images" />
+      <recent name="C:\Users\Jyothsna Boyina\PycharmProjects\post\postbox\static\js" />
+      <recent name="C:\Users\Jyothsna Boyina\PycharmProjects\post\postbox\static" />
+      <recent name="C:\Users\Jyothsna Boyina\PycharmProjects\post\templates\postbox" />
+      <recent name="C:\Users\Jyothsna Boyina\PycharmProjects\post\templates\postbox\js" />
     </key>
   </component>
   <component name="RunManager" selected="Django tests.Test: templates.postbox.index.html">
@@ -645,28 +539,28 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="50" y="7" width="1317" height="707" extended-state="0" />
+    <frame x="-8" y="-8" width="1382" height="784" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18754804" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17862372" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27299702" sideWeight="0.5783309" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.016320474" sideWeight="0.5783309" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29525223" sideWeight="0.48243046" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32937685" sideWeight="0.49707174" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="manage.py@post" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26409495" sideWeight="0.4216691" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39910978" sideWeight="0.49707174" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32937685" sideWeight="0.49707174" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="manage.py@post" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0" sideWeight="0.4216691" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32937685" sideWeight="0.49707174" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39910978" sideWeight="0.49707174" order="4" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -838,20 +732,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/post/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
-          <caret line="109" column="24" selection-start-line="109" selection-start-column="24" selection-end-line="109" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/postbox/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="21" selection-start-line="17" selection-start-column="21" selection-end-line="17" selection-end-column="21" />
           <folding />
         </state>
       </provider>
@@ -864,96 +744,116 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/postbox/views.py">
+    <entry file="file://$PROJECT_DIR$/templates/postbox/Posts_form.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="34" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="34" />
-          <folding>
-            <element signature="e#571#1200#0" expanded="false" />
-            <element signature="e#1231#1842#0" expanded="false" />
-            <element signature="e#1874#2694#0" expanded="false" />
-            <element signature="e#2022#2694#0" expanded="false" />
-            <element signature="e#2727#4554#0" expanded="false" />
-            <element signature="e#4586#6671#0" expanded="false" />
-            <element signature="e#9047#11469#0" expanded="false" />
-            <element signature="e#11504#13966#0" expanded="false" />
-            <element signature="e#14002#16325#0" expanded="false" />
-            <element signature="e#16360#19355#0" expanded="false" />
-            <element signature="e#19391#22223#0" expanded="false" />
-            <element signature="e#22249#22341#0" expanded="false" />
-            <element signature="e#22371#22697#0" expanded="false" />
-            <element signature="e#22732#22786#0" expanded="false" />
-            <element signature="e#22811#22851#0" expanded="false" />
-            <element signature="e#22878#22943#0" expanded="false" />
-            <element signature="e#22977#23802#0" expanded="false" />
-            <element signature="e#23846#23960#0" expanded="false" />
-            <element signature="e#24014#24146#0" expanded="false" />
-            <element signature="e#24197#24321#0" expanded="false" />
-            <element signature="e#24362#24478#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/postbox/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="22" column="41" selection-start-line="22" selection-start-column="41" selection-end-line="22" selection-end-column="41" />
+        <state relative-caret-position="733">
+          <caret line="110" column="59" selection-start-line="110" selection-start-column="59" selection-end-line="110" selection-end-column="59" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/postbox/Posts_form.html">
+    <entry file="file://$PROJECT_DIR$/postbox/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="906">
-          <caret line="117" column="9" selection-start-line="117" selection-start-column="9" selection-end-line="117" selection-end-column="9" />
+        <state relative-caret-position="408">
+          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/postbox/Categories_form.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="21" column="25" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/postbox/Comments_list1.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="112" column="81" selection-start-line="112" selection-start-column="81" selection-end-line="112" selection-end-column="81" />
+        <state relative-caret-position="-564">
+          <caret line="21" column="24" selection-start-line="21" selection-start-column="24" selection-end-line="21" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/postbox/Comments_list.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="115" column="82" selection-start-line="115" selection-start-column="82" selection-end-line="115" selection-end-column="82" />
+        <state relative-caret-position="249">
+          <caret line="142" column="30" selection-start-line="142" selection-start-column="30" selection-end-line="142" selection-end-column="30" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/postbox/user.html">
+    <entry file="file://$PROJECT_DIR$/templates/postbox/Comments_list1.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
-          <caret line="149" column="82" selection-start-line="149" selection-start-column="82" selection-end-line="149" selection-end-column="82" />
+        <state relative-caret-position="-838">
+          <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/postbox/Posts_list.html">
+    <entry file="file://$PROJECT_DIR$/postbox/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
-          <caret line="126" column="62" selection-start-line="126" selection-start-column="62" selection-end-line="126" selection-end-column="62" />
+        <state relative-caret-position="268">
+          <caret line="28" column="35" selection-start-line="28" selection-start-column="35" selection-end-line="28" selection-end-column="35" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/postbox/newsfeed.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="122" column="81" selection-start-line="122" selection-start-column="81" selection-end-line="122" selection-end-column="81" />
+        <state relative-caret-position="378">
+          <caret line="45" column="0" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/postbox/user.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="45" column="0" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/postbox/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="308" column="0" selection-start-line="308" selection-start-column="0" selection-end-line="308" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#48#0" expanded="true" />
+            <element signature="e#571#1200#0" expanded="false" />
+            <element signature="e#1231#1842#0" expanded="false" />
+            <element signature="e#1874#2694#0" expanded="false" />
+            <element signature="e#2022#2694#0" expanded="false" />
+            <element signature="e#2727#4554#0" expanded="false" />
+            <element signature="e#4586#6671#0" expanded="false" />
+            <element signature="e#6707#9015#0" expanded="false" />
+            <element signature="e#9048#11470#0" expanded="false" />
+            <element signature="e#11505#13967#0" expanded="false" />
+            <element signature="e#14003#16326#0" expanded="false" />
+            <element signature="e#16361#19356#0" expanded="false" />
+            <element signature="e#19392#22224#0" expanded="false" />
+            <element signature="e#22250#22342#0" expanded="false" />
+            <element signature="e#22372#22698#0" expanded="false" />
+            <element signature="e#22733#22787#0" expanded="false" />
+            <element signature="e#22812#22852#0" expanded="false" />
+            <element signature="e#22879#22944#0" expanded="false" />
+            <element signature="e#22978#23803#0" expanded="false" />
+            <element signature="e#23847#23961#0" expanded="false" />
+            <element signature="e#24015#24147#0" expanded="false" />
+            <element signature="e#24198#24322#0" expanded="false" />
+            <element signature="e#24363#24479#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/postbox/Posts_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2248">
+          <caret line="28" column="61" selection-start-line="28" selection-start-column="61" selection-end-line="28" selection-end-column="61" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/post/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="49">
+          <caret line="90" column="32" selection-start-line="90" selection-start-column="32" selection-end-line="90" selection-end-column="32" />
           <folding />
         </state>
       </provider>

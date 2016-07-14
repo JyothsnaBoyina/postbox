@@ -39,6 +39,7 @@
     .sidebar-nav>li>a:focus {  color:white;  background-color:orange;  }
     .sidebar-nav li a:active {  color:white;  background-color:orange;  }
     .sidebar-nav > .active { color:white;  background:darkorange; }
+      #imge{overflow-y:hidden;max-height:500px;max-width:100%}
   </style>
 
 </head>
@@ -124,7 +125,7 @@
                   <p align="left" style="font-size:30px;font-family:'Copperplate Gothic Light';color: darkorange">{{ i.title }}</p><hr>
                   <br>
                   {% if  i.image %}
-                            <img src="{{ i.image }}" width="100%" class="img-square" alt="Avatar"/><br><br>
+                            <img  id="imge" src="{{ i.image }}" class="img-square" alt="Avatar"/><br><br>
                   {% endif %}
                    <p align="left">{{i.status|safe}}</p><br>
                     <a href="/postbox/{{ full_name }}/{{ i.cid_id }}/{{ i.id }}/comments/">Comments</a>
@@ -163,7 +164,7 @@
                   <p align="left" style="font-size:30px;font-family:'Copperplate Gothic Light';color: darkorange">{{ i.title }}</p><hr>
                   <br>
                   {% if  i.image %}
-                            <img src="{{ i.image }}" class="img-square" width="100%" alt="Avatar"/><br><br>
+                            <img src="{{ i.image }}" class="img-square" id="imge" alt="Avatar"/><br><br>
                   {% endif %}
                    <p align="left">{{i.status|safe}}</p><br>
                     <a href="/postbox/{{ full_name }}/{{ i.cid_id }}/{{ i.id }}/comments/">Comments</a>

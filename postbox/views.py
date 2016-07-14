@@ -151,6 +151,7 @@ class edit_cat(ListView):
                                           {'mesg': mesg, 'form': form, 'full_name': uname, 'categories': categories},
                                           context)
 
+
 class Create_post(ListView):
     model = Posts
     template_name = 'postbox/Posts_form.html'
